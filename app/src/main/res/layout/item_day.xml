@@ -13,6 +13,7 @@
         android:id="@+id/Calendar_Background"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:background="@drawable/calendar_item"
         android:orientation="vertical">
 
         <TextView
