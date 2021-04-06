@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.R
 
 class HomeFragment : Fragment() , View.OnClickListener{
@@ -32,6 +33,8 @@ class HomeFragment : Fragment() , View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val recyclerView: RecyclerView = view.findViewById(R.id.calendar)
+        //recyclerView.adapter= CalendarAdapter()
 
 
     }
