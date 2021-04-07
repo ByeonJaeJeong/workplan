@@ -27,14 +27,19 @@ class HomeFragment : Fragment() , View.OnClickListener{
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+
+
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.calendar)
-        //recyclerView.adapter= CalendarAdapter()
+
+
+
+
+
 
 
     }
