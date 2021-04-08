@@ -5,11 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import java.text.SimpleDateFormat
 import java.util.*
@@ -29,27 +33,41 @@ class HomeFragment : Fragment() , View.OnClickListener{
                 ViewModelProvider(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        if (homeViewModel.year.toInt() == 0 && homeViewModel.day.toInt() == 0){
+        if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
+            //처음 접속시 데이터가 없으므로 현재날짜를 반환
             val calendar = Calendar.getInstance()
             var year = calendar.get(Calendar.YEAR)
             var month = calendar.get(Calendar.MONTH)+1
-            var day =calendar.get(Calendar.DAY_OF_MONTH)
-            homeViewModel.addTime(year,month,day)
+            homeViewModel.selectCalendar(year,month)
         }
+
         var select_date:TextView = root.findViewById(R.id.select_date)
         select_date.text=homeViewModel.year.toString()+"년"+homeViewModel.month.toString()+"월"
 
+        select_date.setOnClickListener(this)
         return root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
     }
 
 
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+        when(v?.id){
+            R.id.select_date->{
+                //월 변경 메소드
+                /*val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
+                val dialog= BottomSheetDialog(v.context)
+                dialog.setContentView(dialogView)
+                dialog.show()*/
+                val bottomDialog : MonthSelectDialog = MonthSelectDialog()
+                activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag) }
+            }
+        }
     }
 
 

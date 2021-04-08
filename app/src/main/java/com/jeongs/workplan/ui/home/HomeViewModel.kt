@@ -15,12 +15,11 @@ class HomeViewModel : ViewModel() {
     var year : Int = 0
     var month : Int =0
     var day : Int = 0
+    var dayOfWeek : Int =0
 
-    fun addTime(year2: Int,month2: Int, day2: Int){
+    fun selectCalendar(year2: Int,month2: Int){
         year= year2
         month=month2
-        day= day2
-        Log.v(year.toString()+month.toString(),day.toString())
     }
 
 

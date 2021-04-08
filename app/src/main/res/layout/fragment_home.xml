@@ -22,34 +22,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
-                android:gravity="center"
+                android:gravity="left"
                 android:background="@color/BlanchedAlmond"
                 android:orientation="horizontal">
-                <Button
-                    android:id="@+id/leftButton"
-                    android:text="\u003c"
-                    android:background="#00ff0000"
-                    android:gravity="center"
-                    android:textSize="24dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <TextView
+               <TextView
                     android:id="@+id/select_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="24dp"
-                    android:text="연도 출력"
+                    android:textFontWeight="900"
+                    android:text="2020년 7월"
+                    android:textColor="@color/black"
                     android:padding="5dp"
                     android:layout_gravity="center"
                     android:layout_margin="15dp" />
-                <Button
-                    android:id="@+id/rightButton"
-                    android:text="\u003e"
-                    android:textSize="24dp"
-                    android:background="#00ff0000"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center" />
             </LinearLayout>
             <!--요일-->
             <LinearLayout
