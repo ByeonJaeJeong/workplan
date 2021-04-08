@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jeongs.workplan.R
 
-class MonthSelectDialog : BottomSheetDialogFragment() {
-
+class MonthSelectDialog(year:Int,month:Int) : BottomSheetDialogFragment() {
+        var year = year
+        var month = month
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,6 +17,10 @@ class MonthSelectDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View=
         inflater.inflate(R.layout.bottom_sheet,container,false)
-        //layout 연결
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+    }
 }

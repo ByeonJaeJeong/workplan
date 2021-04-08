@@ -64,8 +64,8 @@ class HomeFragment : Fragment() , View.OnClickListener{
                 val dialog= BottomSheetDialog(v.context)
                 dialog.setContentView(dialogView)
                 dialog.show()*/
-                val bottomDialog : MonthSelectDialog = MonthSelectDialog()
-                activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag) }
+                val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month)
+                activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
             }
         }
     }
