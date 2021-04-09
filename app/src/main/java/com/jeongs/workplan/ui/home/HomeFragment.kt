@@ -7,7 +7,10 @@ import android.view.ViewGroup
 import android.widget.CalendarView
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
@@ -64,11 +67,21 @@ class HomeFragment : Fragment() , View.OnClickListener{
                 val dialog= BottomSheetDialog(v.context)
                 dialog.setContentView(dialogView)
                 dialog.show()*/
-                val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month)
+                val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month){
+                    var year = it.split("/")[0]
+                    var month = it.split("/")[1]
+
+                    homeViewModel.year=year.toInt()
+                    homeViewModel.month=month.toInt()
+                    refreshFragment(this,parentFragmentManager)
+                }
                 activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
             }
         }
     }
 
-
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
+    }
 }
