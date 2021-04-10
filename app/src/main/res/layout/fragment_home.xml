@@ -29,13 +29,16 @@
                     android:id="@+id/select_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="24dp"
+                    android:textSize="20dp"
                     android:textFontWeight="900"
                     android:text="2020년 7월"
                     android:textColor="@color/black"
                     android:padding="5dp"
                     android:layout_gravity="center"
+                   android:drawablePadding="5dp"
+                   android:drawableRight="@drawable/down_arrow"
                     android:layout_margin="15dp" />
+
             </LinearLayout>
             <!--요일-->
             <LinearLayout

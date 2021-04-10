@@ -45,7 +45,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
         }
 
         var select_date:TextView = root.findViewById(R.id.select_date)
-        select_date.text=homeViewModel.year.toString()+"년"+homeViewModel.month.toString()+"월"
+        select_date.text=homeViewModel.year.toString()+"년 "+homeViewModel.month.toString()+"월"
 
         select_date.setOnClickListener(this)
         return root
