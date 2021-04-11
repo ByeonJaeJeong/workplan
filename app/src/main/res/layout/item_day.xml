@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data class="DayItemBinding">
-
-
+        <variable
+            name="calendarInfo"
+            type="com.jeongs.workplan.db.CalendarDAO" />
     </data>
 
 
@@ -22,6 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:textSize="14dp"
+            app:setDate="@{calendarInfo}"
             tools:text="일자출력"
             android:textColor="@color/black"
             android:layout_margin="5dp">

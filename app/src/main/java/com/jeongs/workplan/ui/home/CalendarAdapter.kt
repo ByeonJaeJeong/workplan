@@ -1,46 +1,37 @@
 package com.jeongs.workplan.ui.home
 
-import android.view.LayoutInflater
+import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
-import android.widget.Toast
-import androidx.recyclerview.widget.RecyclerView
-import com.jeongs.workplan.R
-import com.jeongs.workplan.db.calendarDAO
+import androidx.recyclerview.widget.ListAdapter
+import com.jeongs.workplan.db.CalendarDAO
 
-class CalendarAdapter(private  val items: ArrayList<calendarDAO>) : RecyclerView.Adapter<CalendarAdapter.ViewHolder>() {
-
-
-    override fun getItemCount(): Int =items.size
+class CalendarAdapter(val view: View) :
+        ListAdapter<CalendarDAO, ViewHolder>(
+                CalendarAdapterDiffcallback()) {
 
 
-    override fun onBindViewHolder(holder: CalendarAdapter.ViewHolder, position: Int) {
-        val item = items[position]
-        val listener = View.OnClickListener { it->
-            Toast.makeText(it.context, "Clicked"+item.day,Toast.LENGTH_SHORT).show()
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+
+        // 0일경우 날짜표시 x
+        if (item.day == 0) {
+            holder.dateNumber.visibility = View.GONE
         }
-        holder.apply {
-            bind(listener, item)
-            itemView.tag = item
+
+        //일요일
+        if (item.week == 0) {
+            holder.dateNumber.setTextColor(Color.parseColor("#B22222"))
         }
+        //토요일
+        if (item.week == 6) {
+            holder.dateNumber.setTextColor(Color.BLUE)
+        }
+        holder.bind(item)
+
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarAdapter.ViewHolder {
-        val inflatedView= LayoutInflater.from(parent.context).inflate(R.layout.item_day,parent,false)
-
-        return CalendarAdapter.ViewHolder(inflatedView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
     }
-
-
-    class ViewHolder(v:View) : RecyclerView.ViewHolder(v){
-        private  var view:View =v
-        fun bind(listener: View.OnClickListener,item: calendarDAO){
-
-        }
-    }
-
-
-
 }

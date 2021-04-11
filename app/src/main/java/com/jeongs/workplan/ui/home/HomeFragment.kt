@@ -1,31 +1,27 @@
 package com.jeongs.workplan.ui.home
 
 import android.os.Bundle
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CalendarView
-import android.widget.ImageButton
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
-import java.text.SimpleDateFormat
-import java.util.*
+import com.jeongs.workplan.db.CalendarDAO
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import android.icu.util.Calendar
+import android.util.Log
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
     private lateinit var homeViewModel: HomeViewModel
-
-
+    private lateinit var adapter: CalendarAdapter
+    lateinit var calendar: Calendar
+    lateinit var root:View
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -34,11 +30,11 @@ class HomeFragment : Fragment() , View.OnClickListener{
     ): View? {
         homeViewModel =
                 ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
+         root  = inflater.inflate(R.layout.fragment_home, container, false)
 
         if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
             //처음 접속시 데이터가 없으므로 현재날짜를 반환
-            val calendar = Calendar.getInstance()
+             calendar = Calendar.getInstance()
             var year = calendar.get(Calendar.YEAR)
             var month = calendar.get(Calendar.MONTH)+1
             homeViewModel.selectCalendar(year,month)
@@ -54,9 +50,31 @@ class HomeFragment : Fragment() , View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        adapter= CalendarAdapter(view)
+        root.calendar.adapter =adapter
+        calendar = Calendar.getInstance()
+        //현재 날짜 정보 입력
+        calendar.set(Calendar.YEAR,homeViewModel.year)
+        calendar.set(Calendar.MONTH,homeViewModel.month-1)
+
+        val year=calendar.get(Calendar.YEAR)
+        val maxDate =calendar.getActualMaximum(Calendar.DATE)
+        val week =(calendar.get(Calendar.DAY_OF_WEEK)+3)%7
+        val month = calendar.get(Calendar.MONTH)+1
+        Log.v("일자",year.toString()+","+month.toString(),null)
+        Log.v("일자",week.toString(),null)
+        val list = MutableList(week, init = { CalendarDAO(year,month,0,0) })
+        for (i in 1..maxDate) {
+            val week_day = (week+i-1) % 7
+            list.add(CalendarDAO(year,month,i,week_day))
+        }
+
+        adapter.submitList(list)
 
 
     }
+
+
 
 
     override fun onClick(v: View?) {
@@ -85,3 +103,4 @@ class HomeFragment : Fragment() , View.OnClickListener{
         ft.detach(fragment).attach(fragment).commit()
     }
 }
+
