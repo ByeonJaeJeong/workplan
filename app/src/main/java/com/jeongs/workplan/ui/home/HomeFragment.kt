@@ -2,9 +2,6 @@ package com.jeongs.workplan.ui.home
 
 import android.os.Bundle
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -14,7 +11,16 @@ import com.jeongs.workplan.R
 import com.jeongs.workplan.db.CalendarDAO
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.icu.util.Calendar
+import android.system.Os
 import android.util.Log
+import android.view.*
+import android.widget.Toast
+
+// 추가로 만들어야 하는 내용
+// scroll event 를 이용해서 달력 월이동
+// 일 눌렸을때 하는 역할
+// 일정추가하기 버튼 추가
+// 통계와 더보기 버튼 역할
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
@@ -44,8 +50,10 @@ class HomeFragment : Fragment() , View.OnClickListener{
         select_date.text=homeViewModel.year.toString()+"년 "+homeViewModel.month.toString()+"월"
 
         select_date.setOnClickListener(this)
+
         return root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,7 +67,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
         val year=calendar.get(Calendar.YEAR)
         val maxDate =calendar.getActualMaximum(Calendar.DATE)
-        val week =(calendar.get(Calendar.DAY_OF_WEEK)+3)%7
+        val week =(calendar.get(Calendar.DAY_OF_WEEK)+2)%7
         val month = calendar.get(Calendar.MONTH)+1
         Log.v("일자",year.toString()+","+month.toString(),null)
         Log.v("일자",week.toString(),null)
@@ -73,7 +81,6 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
 
     }
-
 
 
 
@@ -102,5 +109,8 @@ class HomeFragment : Fragment() , View.OnClickListener{
         var ft: FragmentTransaction = fragmentManager.beginTransaction()
         ft.detach(fragment).attach(fragment).commit()
     }
+
+
+
 }
 
