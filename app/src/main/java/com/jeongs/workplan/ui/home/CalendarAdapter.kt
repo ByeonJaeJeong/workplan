@@ -31,6 +31,7 @@ class CalendarAdapter(val view: View) :
         }
         holder.bind(item)
         if(item.day != 0){
+            //item Click event
             holder.itemView.setOnClickListener(View.OnClickListener {
                 Toast.makeText(it.context, "클릭이벤트 작동",position).show()
 
