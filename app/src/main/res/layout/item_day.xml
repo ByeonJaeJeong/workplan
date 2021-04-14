@@ -21,12 +21,14 @@
             android:id="@+id/textView_DateNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="right"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:layout_gravity="center"
             android:textSize="14dp"
+            android:layout_marginTop="1dp"
             app:setDate="@{calendarInfo}"
             tools:text="일자출력"
-            android:textColor="@color/black"
-            android:layout_margin="5dp">
+            android:textColor="@color/black">
 
         </TextView>
     </LinearLayout>

@@ -3,4 +3,6 @@
     <string name="title_home">메인</string>
     <string name="title_statistics">통계</string>
     <string name="title_more">더보기</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

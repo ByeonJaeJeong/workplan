@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:animateLayoutChanges="true"
                 android:gravity="left"
-                android:background="@color/BlanchedAlmond"
+                android:background="@color/purple_500"
                 android:orientation="horizontal">
                <TextView
                     android:id="@+id/select_date"

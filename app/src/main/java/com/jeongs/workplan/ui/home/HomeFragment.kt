@@ -69,17 +69,13 @@ class HomeFragment : Fragment() , View.OnClickListener{
         val maxDate =calendar.getActualMaximum(Calendar.DATE)
         val week =(calendar.get(Calendar.DAY_OF_WEEK)+2)%7
         val month = calendar.get(Calendar.MONTH)+1
-        Log.v("일자",year.toString()+","+month.toString(),null)
-        Log.v("일자",week.toString(),null)
+
         val list = MutableList(week, init = { CalendarDAO(year,month,0,0) })
         for (i in 1..maxDate) {
             val week_day = (week+i-1) % 7
             list.add(CalendarDAO(year,month,i,week_day))
         }
-
         adapter.submitList(list)
-
-
     }
 
 
@@ -88,10 +84,6 @@ class HomeFragment : Fragment() , View.OnClickListener{
         when(v?.id){
             R.id.select_date->{
                 //월 변경 메소드
-                /*val dialogView = layoutInflater.inflate(R.layout.bottom_sheet,null)
-                val dialog= BottomSheetDialog(v.context)
-                dialog.setContentView(dialogView)
-                dialog.show()*/
                 val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month){
                     var year = it.split("/")[0]
                     var month = it.split("/")[1]
