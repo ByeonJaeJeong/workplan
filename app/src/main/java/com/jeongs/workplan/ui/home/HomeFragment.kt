@@ -18,8 +18,7 @@ import android.widget.Toast
 
 // 추가로 만들어야 하는 내용
 // scroll event 를 이용해서 달력 월이동
-// 일 눌렸을때 하는 역할
-// 일정추가하기 버튼 추가
+// 일 눌렸을때 하는 역할(calendar 의 주기능 추가 할예정)
 // 통계와 더보기 버튼 역할
 
 class HomeFragment : Fragment() , View.OnClickListener{
