@@ -1,6 +1,8 @@
 package com.jeongs.workplan.ui.home
 
 import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
@@ -11,7 +13,9 @@ import android.widget.Toast
 import androidx.databinding.adapters.ViewBindingAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.ListAdapter
+import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
+import com.jeongs.workplan.TestActivity2
 import com.jeongs.workplan.db.CalendarDAO
 
 class CalendarAdapter(val view: View) :
@@ -54,6 +58,9 @@ class CalendarAdapter(val view: View) :
                 bundle.putInt("month",item.month)
                 bundle.putInt("day",item.day)
 
+                val intent = Intent(it.context, TestActivity2::class.java)
+
+                it.context.startActivity(intent)
 
             })
         }
