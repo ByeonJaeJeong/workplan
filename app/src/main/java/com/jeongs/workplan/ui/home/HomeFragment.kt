@@ -21,6 +21,9 @@ import android.widget.Toast
 // 일 눌렸을때 하는 역할(calendar 의 주기능 추가 할예정)
 // 통계와 더보기 버튼 역할
 
+//현재 오류
+//메인에서 월 변경후 통계나 더보기 누른후 메인으로 돌아오면 월이 다시최근 월로 변경되어있음
+
 class HomeFragment : Fragment() , View.OnClickListener{
 
     private lateinit var homeViewModel: HomeViewModel
