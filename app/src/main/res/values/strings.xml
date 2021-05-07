@@ -5,4 +5,6 @@
     <string name="title_more">더보기</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="back_btn">닫기</string>
+    <string name="check_btn">완료</string>
 </resources>

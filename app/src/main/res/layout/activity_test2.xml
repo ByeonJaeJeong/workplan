@@ -6,25 +6,138 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".TestActivity2">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@drawable/toolbar_title_item">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="일정입력"
+            android:textSize="32dp"/>
+    </androidx.appcompat.widget.Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/light_blue_600">
+        android:orientation="vertical"
+        android:padding="20dp">
         <TextView
-            android:id="@+id/Title_Bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="32dp"
-            android:layout_weight="1"
-            android:text="타이틀"/>
-        <Button
-            android:id="@+id/exit_btn"
-            android:layout_width="wrap_content"
+            android:text="시작"/>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/design_default_color_background"
-            android:text="X"/>
+            android:padding="5px"
+            android:paddingLeft="10px"
+            android:paddingRight="10px"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:layout_marginLeft="10px"
+                android:text="2021.05.07금"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10px"
+                android:gravity="center"
+                android:text="오전 7:00"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="종료"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5px"
+            android:paddingLeft="10px"
+            android:layout_marginLeft="10px"
+            android:paddingRight="10px"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="2021.05.07금"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="10px"
+                android:gravity="center"
+                android:text="오전 7:00"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?android:attr/listChoiceIndicatorMultiple"
+                android:button="@null"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="하루 종일"
+                android:textColor="@color/black"
+                android:textSize="16dp"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="시간대"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="서울(GMT+9:00)" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="알림"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="알림 추가"
+                android:layout_weight="1"
+                android:layout_gravity="left"
+                android:layout_marginLeft="20px"
+                android:textColor="@color/black"/>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:src="@drawable/check_btn"
+                android:background="@color/design_default_color_background"
+                />
+        </LinearLayout>
+        <se
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="반복"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="없음"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="장소"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="메모"/>
     </LinearLayout>
 </LinearLayout>
