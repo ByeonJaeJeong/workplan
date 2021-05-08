@@ -123,7 +123,7 @@
                 android:background="@color/design_default_color_background"
                 />
         </LinearLayout>
-        <se
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="반복"/>
@@ -135,9 +135,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="장소"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="장소를 입력하세요"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="메모"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="메모를 입력하세요"/>
     </LinearLayout>
 </LinearLayout>
