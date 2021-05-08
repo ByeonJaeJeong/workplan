@@ -33,7 +33,8 @@
             android:padding="5px"
             android:paddingLeft="10px"
             android:paddingRight="10px"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,6 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:padding="5px"
             android:paddingLeft="10px"
             android:layout_marginLeft="10px"
@@ -77,7 +79,8 @@
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -98,6 +101,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="서울(GMT+9:00)" />
         <TextView
             android:layout_width="match_parent"
@@ -130,6 +134,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="없음"/>
         <TextView
             android:layout_width="match_parent"
@@ -138,6 +143,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:hint="장소를 입력하세요"/>
         <TextView
             android:layout_width="match_parent"
@@ -146,6 +152,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:hint="메모를 입력하세요"/>
     </LinearLayout>
 </LinearLayout>
