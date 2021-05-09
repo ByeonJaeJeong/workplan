@@ -36,6 +36,7 @@
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
             <EditText
+                android:id="@+id/start_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -43,6 +44,7 @@
                 android:layout_marginLeft="10px"
                 android:text="2021.05.07금"/>
             <EditText
+                android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -64,12 +66,14 @@
             android:paddingRight="10px"
             android:orientation="horizontal">
             <EditText
+                android:id="@+id/end_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
                 android:text="2021.05.07금"/>
             <EditText
+                android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -82,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp">
             <CheckBox
+                android:id="@+id/allDay_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?android:attr/listChoiceIndicatorMultiple"
@@ -99,6 +104,7 @@
             android:layout_height="wrap_content"
             android:text="시간대"/>
         <EditText
+            android:id="@+id/time_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -120,6 +126,7 @@
                 android:layout_marginLeft="20px"
                 android:textColor="@color/black"/>
             <ImageButton
+                android:id="@+id/alarm_addBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -132,6 +139,7 @@
             android:layout_height="wrap_content"
             android:text="반복"/>
         <EditText
+            android:id="@+id/repeat_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -141,6 +149,7 @@
             android:layout_height="wrap_content"
             android:text="장소"/>
         <EditText
+            android:id="@+id/place_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -150,6 +159,7 @@
             android:layout_height="wrap_content"
             android:text="메모"/>
         <EditText
+            android:id="@+id/memo_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
