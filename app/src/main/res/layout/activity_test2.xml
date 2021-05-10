@@ -35,21 +35,33 @@
             android:paddingRight="10px"
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
-            <EditText
+            <TextView
                 android:id="@+id/start_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:layout_marginLeft="10px"
+                android:background="@drawable/textviewbtn_item"
+                android:layout_marginLeft="30px"
+                android:clickable="true"
+                android:focusable="true"
+                android:textSize="20dp"
+                android:singleLine="true"
+                android:textColor="@color/black"
                 android:text="2021.05.07금"/>
-            <EditText
+            <TextView
                 android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="10px"
+                android:layout_marginLeft="30px"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/textviewbtn_item"
                 android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="20dp"
+                android:singleLine="true"
                 android:text="오전 7:00"/>
         </LinearLayout>
         <TextView
@@ -61,23 +73,38 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:padding="5px"
+            android:clickable="true"
+            android:focusable="true"
             android:paddingLeft="10px"
             android:layout_marginLeft="10px"
             android:paddingRight="10px"
             android:orientation="horizontal">
-            <EditText
+            <TextView
                 android:id="@+id/end_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
+                android:textSize="20dp"
+                android:layout_marginLeft="30px"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/textviewbtn_item"
+                android:textColor="@color/black"
+                android:singleLine="true"
                 android:text="2021.05.07금"/>
-            <EditText
+            <TextView
                 android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginLeft="10px"
+                android:layout_marginLeft="30px"
+                android:textSize="20dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@drawable/textviewbtn_item"
+                android:textColor="@color/black"
+                android:singleLine="true"
                 android:gravity="center"
                 android:text="오전 7:00"/>
         </LinearLayout>
@@ -103,11 +130,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="시간대"/>
-        <EditText
+        <TextView
             android:id="@+id/time_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="20dp"
+            android:background="@drawable/textviewbtn_item"
+            android:textColor="@color/black"
+            android:singleLine="true"
+            android:paddingLeft="20dp"
             android:text="서울(GMT+9:00)" />
         <TextView
             android:layout_width="match_parent"
@@ -138,11 +172,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="반복"/>
-        <EditText
+        <TextView
             android:id="@+id/repeat_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:textSize="20dp"
+            android:paddingLeft="20dp"
+            android:background="@drawable/textviewbtn_item"
+            android:textColor="@color/black"
+            android:singleLine="true"
             android:text="없음"/>
         <TextView
             android:layout_width="match_parent"
