@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_test2.*
 
@@ -20,6 +21,24 @@ class TestActivity2 : AppCompatActivity() {
         //supportActionBar?.setDisplayShowHomeEnabled(true)
 
 
+
+        val startDayBtn: EditText = findViewById(R.id.start_day)
+        val endDayBtn : EditText = findViewById(R.id.end_day)
+        val startTimeBtn : EditText = findViewById(R.id.start_time)
+        val endTimeBtn : EditText = findViewById(R.id.end_time)
+
+        startDayBtn.setOnClickListener{
+            //시작일자
+        }
+        endDayBtn.setOnClickListener {
+            //종료일자
+        }
+        startTimeBtn.setOnClickListener{
+            //시작시간
+        }
+        endTimeBtn.setOnClickListener {
+            //종료시간
+        }
 
     }
 
