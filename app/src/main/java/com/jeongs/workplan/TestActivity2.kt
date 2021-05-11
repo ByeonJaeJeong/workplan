@@ -8,8 +8,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_test2.*
+import java.text.SimpleDateFormat
 import java.util.*
 
+//내일 패치 내용
+//버튼 동작 함수로 만들어서 중복사용 줄이기
+//(버튼 ,Calendar) 받기
 class TestActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,8 +57,10 @@ class TestActivity2 : AppCompatActivity() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH,month)
                 calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                var day_of_week=day_of_the_week(calendar.get(Calendar.DAY_OF_WEEK))
-                startDayBtn.text=year.toString()+"."+(month+1).toString()+"."+dayOfMonth.toString()+"("+day_of_week+")"
+                val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+
+                startDayBtn.text=sdf.format(cal.time)
             },year,month,day)
             datePicker.show()
         }
@@ -65,8 +71,9 @@ class TestActivity2 : AppCompatActivity() {
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH,month)
                 calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                var day_of_week=day_of_the_week(calendar.get(Calendar.DAY_OF_WEEK))
-                endDayBtn.text=year.toString()+"."+(month+1).toString()+"."+dayOfMonth.toString()+"("+day_of_week+")"
+                val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+                endDayBtn.text=sdf.format(cal.time)
             },year,month,day)
             datePicker.show()
 
@@ -77,7 +84,12 @@ class TestActivity2 : AppCompatActivity() {
             cal.set(Calendar.HOUR,0)
             cal.set(Calendar.MINUTE,0)
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-               startTimeBtn.text= if(hour<12){"오전"+hour.toString()}else{"오후"+(hour-12).toString()}+":"+minute.toString()
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.HOUR,hour)
+                calendar.set(Calendar.MINUTE,minute)
+                val myFormat = "a hh:mm"
+                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+               startTimeBtn.text= sdf.format(calendar.time)
             }
             TimePickerDialog(it.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
@@ -87,7 +99,12 @@ class TestActivity2 : AppCompatActivity() {
             cal.set(Calendar.HOUR,0)
             cal.set(Calendar.MINUTE,0)
             val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                endTimeBtn.text= if(hour<12){"오전"+hour.toString()}else{"오후"+(hour-12).toString()}+":"+minute.toString()
+                val calendar = Calendar.getInstance()
+                calendar.set(Calendar.HOUR,hour)
+                calendar.set(Calendar.MINUTE,minute)
+                val myFormat = "a hh:mm"
+                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+                endTimeBtn.text= sdf.format(calendar.time)
             }
             TimePickerDialog(it.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
