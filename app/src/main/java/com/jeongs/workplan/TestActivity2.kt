@@ -11,9 +11,7 @@ import kotlinx.android.synthetic.main.activity_test2.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-//내일 패치 내용
-//버튼 동작 함수로 만들어서 중복사용 줄이기
-//(버튼 ,Calendar) 받기
+
 class TestActivity2 : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,81 +32,24 @@ class TestActivity2 : AppCompatActivity() {
         val endTimeBtn : TextView = findViewById(R.id.end_time)
 
 
-        var cal = Calendar.getInstance()
-        val year = cal.get(Calendar.YEAR)
-        val month = cal.get(Calendar.MONTH)
-        val day = cal.get(Calendar.DAY_OF_MONTH)
-        //요일 한글로 변경
-        fun day_of_the_week(number: Int):String{
-            when(number){
-                1->return "일"
-                2->return "월"
-                3->return "화"
-                4->return "수"
-                5->return "목"
-                6->return "금"
-                else->return "토"
-            }
-        }
-
         startDayBtn.setOnClickListener{
-            val datePicker  =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH,month)
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                val myFormat = "yyyy.MM.dd(E)" // mention the format you need
-                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
-
-                startDayBtn.text=sdf.format(cal.time)
-            },year,month,day)
-            datePicker.show()
+            //시작일자
+            getDate(startDayBtn, Calendar.getInstance())
         }
         endDayBtn.setOnClickListener {
             //종료일자
-            val datePicker  =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.YEAR, year)
-                calendar.set(Calendar.MONTH,month)
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
-                val myFormat = "yyyy.MM.dd(E)" // mention the format you need
-                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
-                endDayBtn.text=sdf.format(cal.time)
-            },year,month,day)
-            datePicker.show()
-
+            getDate(endDayBtn, Calendar.getInstance())
         }
         startTimeBtn.setOnClickListener{
             //시작시간
-            val cal = Calendar.getInstance()
-            cal.set(Calendar.HOUR,0)
-            cal.set(Calendar.MINUTE,0)
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.HOUR,hour)
-                calendar.set(Calendar.MINUTE,minute)
-                val myFormat = "a hh:mm"
-                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
-               startTimeBtn.text= sdf.format(calendar.time)
-            }
-            TimePickerDialog(it.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            getTime(startTimeBtn)
         }
         endTimeBtn.setOnClickListener {
             //종료시간
-            val cal = Calendar.getInstance()
-            cal.set(Calendar.HOUR,0)
-            cal.set(Calendar.MINUTE,0)
-            val timeSetListener = TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-                val calendar = Calendar.getInstance()
-                calendar.set(Calendar.HOUR,hour)
-                calendar.set(Calendar.MINUTE,minute)
-                val myFormat = "a hh:mm"
-                val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
-                endTimeBtn.text= sdf.format(calendar.time)
-            }
-            TimePickerDialog(it.context, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+            getTime(endTimeBtn)
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu , menu)
@@ -126,5 +67,29 @@ class TestActivity2 : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+    //
+    fun getTime(textView: TextView){
+        val timeSetListener = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.HOUR,hour)
+            calendar.set(Calendar.MINUTE,minute)
+            val myFormat = "a hh:mm"
+            val sdf = SimpleDateFormat(myFormat, Locale.KOREA)
+            textView.text= sdf.format(calendar.time)
+        },0,0,false)
+        timeSetListener.show()
+    }
+    fun getDate(textView: TextView, calendar: Calendar){
+        val datePicker  =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val calendar = Calendar.getInstance()
+            calendar.set(Calendar.YEAR, year)
+            calendar.set(Calendar.MONTH,month)
+            calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
+            val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+            val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+            textView.text=sdf.format(calendar.time)
+        },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH))
+        datePicker.show()
     }
 }
