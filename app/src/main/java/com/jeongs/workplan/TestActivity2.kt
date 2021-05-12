@@ -99,6 +99,8 @@ class TestActivity2 : AppCompatActivity() {
         },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
     }
+    //커스텀 다이얼로그 생성
+    //메뉴바 형식 리턴->TextView로 데이터값 이동
     private fun getTimeSetting(textView: TextView){
          val builder = AlertDialog.Builder(this)
         builder.setTitle("시간설정")
