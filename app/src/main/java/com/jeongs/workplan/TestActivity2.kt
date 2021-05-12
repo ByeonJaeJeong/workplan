@@ -1,7 +1,10 @@
 package com.jeongs.workplan
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.app.TimePickerDialog
+import android.content.DialogInterface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -30,7 +33,7 @@ class TestActivity2 : AppCompatActivity() {
         val endDayBtn : TextView = findViewById(R.id.end_day)
         val startTimeBtn : TextView = findViewById(R.id.start_time)
         val endTimeBtn : TextView = findViewById(R.id.end_time)
-
+        val timeBtn : TextView = findViewById(R.id.time_edit)
 
         startDayBtn.setOnClickListener{
             //시작일자
@@ -47,6 +50,10 @@ class TestActivity2 : AppCompatActivity() {
         endTimeBtn.setOnClickListener {
             //종료시간
             getTime(endTimeBtn)
+        }
+        timeBtn.setOnClickListener {
+            //시간설정
+
         }
     }
 
@@ -69,7 +76,7 @@ class TestActivity2 : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     //
-    fun getTime(textView: TextView){
+    private fun getTime(textView: TextView){
         val timeSetListener = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.HOUR,hour)
@@ -80,7 +87,7 @@ class TestActivity2 : AppCompatActivity() {
         },0,0,false)
         timeSetListener.show()
     }
-    fun getDate(textView: TextView, calendar: Calendar){
+    private fun getDate(textView: TextView, calendar: Calendar){
         val datePicker  =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             val calendar = Calendar.getInstance()
             calendar.set(Calendar.YEAR, year)
@@ -91,5 +98,14 @@ class TestActivity2 : AppCompatActivity() {
             textView.text=sdf.format(calendar.time)
         },calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
+    }
+    private fun getTimeSetting(textView: TextView){
+         val builder = AlertDialog.Builder(this)
+        builder.setTitle("시간설정")
+        var listener= DialogInterface.OnClickListener { dialog, which ->
+            when (which){
+
+            }
+        }
     }
 }
