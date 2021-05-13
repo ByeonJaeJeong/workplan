@@ -66,15 +66,16 @@ class HomeFragment : Fragment() , View.OnClickListener{
         //현재 날짜 정보 입력
         calendar.set(Calendar.YEAR,homeViewModel.year)
         calendar.set(Calendar.MONTH,homeViewModel.month-1)
+        calendar.set(Calendar.DAY_OF_MONTH,1)
 
         val year=calendar.get(Calendar.YEAR)
         val maxDate =calendar.getActualMaximum(Calendar.DATE)
-        val week =(calendar.get(Calendar.DAY_OF_WEEK)+2)%7
+        val week =calendar.get(Calendar.DAY_OF_WEEK)
         val month = calendar.get(Calendar.MONTH)+1
-
-        val list = MutableList(week, init = { CalendarDAO(year,month,0,0) })
+        Toast.makeText(view.context,week.toString(),Toast.LENGTH_SHORT).show()
+        val list = MutableList(week-1, init = { CalendarDAO(year,month,0,0) })
         for (i in 1..maxDate) {
-            val week_day = (week+i-1) % 7
+            val week_day = (week-1+i) % 7
             list.add(CalendarDAO(year,month,i,week_day))
         }
         adapter.submitList(list)
