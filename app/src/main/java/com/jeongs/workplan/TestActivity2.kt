@@ -5,8 +5,10 @@ import android.app.DatePickerDialog
 import android.app.Dialog
 import android.app.TimePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
@@ -27,6 +29,14 @@ class TestActivity2 : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.x_btn)
         //supportActionBar?.setDisplayShowHomeEnabled(true)
 
+        val intent : Intent = getIntent()
+        var get_year = intent.getIntExtra("year",0)
+        var get_month = intent.getIntExtra("month",0)
+        var get_day = intent.getIntExtra("day",0)
+        val get_calendar : Calendar = Calendar.getInstance()
+        get_calendar.set(Calendar.YEAR,get_year)
+        get_calendar.set(Calendar.MONTH,get_month-1)
+        get_calendar.set(Calendar.DAY_OF_MONTH,get_day)
 
 
         val startDayBtn: TextView = findViewById(R.id.start_day)
@@ -35,13 +45,21 @@ class TestActivity2 : AppCompatActivity() {
         val endTimeBtn : TextView = findViewById(R.id.end_time)
         val timeBtn : TextView = findViewById(R.id.time_edit)
 
+        //초기설정
+        //시작일자
+        val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+        startDayBtn.text=sdf.format(get_calendar.time)
+        //종료일자
+        endDayBtn.text=sdf.format(get_calendar.time)
+
         startDayBtn.setOnClickListener{
             //시작일자
-            getDate(startDayBtn, Calendar.getInstance())
+            getDate(startDayBtn, get_calendar)
         }
         endDayBtn.setOnClickListener {
             //종료일자
-            getDate(endDayBtn, Calendar.getInstance())
+            getDate(endDayBtn, get_calendar)
         }
         startTimeBtn.setOnClickListener{
             //시작시간
@@ -56,6 +74,8 @@ class TestActivity2 : AppCompatActivity() {
             getTimeSetting(timeBtn)
         }
     }
+
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -89,10 +109,6 @@ class TestActivity2 : AppCompatActivity() {
     }
     private fun getDate(textView: TextView, calendar: Calendar){
         val datePicker  =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            val calendar = Calendar.getInstance()
-            calendar.set(Calendar.YEAR, year)
-            calendar.set(Calendar.MONTH,month)
-            calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth)
             val myFormat = "yyyy.MM.dd(E)" // mention the format you need
             val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
             textView.text=sdf.format(calendar.time)

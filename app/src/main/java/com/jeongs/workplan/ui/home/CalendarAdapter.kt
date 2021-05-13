@@ -52,16 +52,13 @@ class CalendarAdapter(val view: View) :
         if(item.day != 0){
             //item Click event
             holder.itemView.setOnClickListener(View.OnClickListener {
-                Toast.makeText(it.context, "클릭이벤트 작동",position).show()
-                val bundle= Bundle()
-                bundle.putInt("year",item.year)
-                bundle.putInt("month",item.month)
-                bundle.putInt("day",item.day)
 
                 val intent = Intent(it.context, TestActivity2::class.java)
+                intent.putExtra("year",item.year)
+                intent.putExtra("month",item.month)
+                intent.putExtra("day",item.day)
 
                 it.context.startActivity(intent)
-
             })
         }
 
