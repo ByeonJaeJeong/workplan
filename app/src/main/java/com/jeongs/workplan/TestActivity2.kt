@@ -53,7 +53,7 @@ class TestActivity2 : AppCompatActivity() {
         }
         timeBtn.setOnClickListener {
             //시간설정
-
+            getTimeSetting(timeBtn)
         }
     }
 
@@ -102,12 +102,11 @@ class TestActivity2 : AppCompatActivity() {
     //커스텀 다이얼로그 생성
     //메뉴바 형식 리턴->TextView로 데이터값 이동
     private fun getTimeSetting(textView: TextView){
-         val builder = AlertDialog.Builder(this)
-        builder.setTitle("시간설정")
-        var listener= DialogInterface.OnClickListener { dialog, which ->
-            when (which){
-
-            }
-        }
+        val items = arrayOf("서울(GMT+9)","미국(GMT-4)","중국(GMT+8)")
+        val builder = AlertDialog.Builder(this)
+                .setTitle("시간설정")
+                .setItems(items){ dialog, which->
+                    textView.text="${items[which]}"
+                }.show()
     }
 }
