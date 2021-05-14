@@ -23,6 +23,7 @@ import android.widget.Toast
 
 //현재 오류
 //메인에서 월 변경후 통계나 더보기 누른후 메인으로 돌아오면 월이 다시최근 월로 변경되어있음
+//viewmodel 을 공용으로 쓰는걸 만들어야함
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
