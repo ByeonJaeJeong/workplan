@@ -1,3 +1,4 @@
+
 package com.jeongs.workplan.ui.home
 
 import android.os.Bundle
@@ -11,10 +12,9 @@ import com.jeongs.workplan.R
 import com.jeongs.workplan.db.CalendarDAO
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.icu.util.Calendar
-import android.system.Os
-import android.util.Log
 import android.view.*
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 
 // 추가로 만들어야 하는 내용
 // scroll event 를 이용해서 달력 월이동
@@ -27,18 +27,23 @@ import android.widget.Toast
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
-    private lateinit var homeViewModel: HomeViewModel
+    private lateinit var  homeViewModel: SharedViewModel
     private lateinit var adapter: CalendarAdapter
     lateinit var calendar: Calendar
     lateinit var root:View
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.run {
+            homeViewModel= ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
+        }
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-                ViewModelProvider(this).get(HomeViewModel::class.java)
          root  = inflater.inflate(R.layout.fragment_home, container, false)
 
         if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
@@ -73,7 +78,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
         val maxDate =calendar.getActualMaximum(Calendar.DATE)
         val week =calendar.get(Calendar.DAY_OF_WEEK)
         val month = calendar.get(Calendar.MONTH)+1
-        Toast.makeText(view.context,week.toString(),Toast.LENGTH_SHORT).show()
+
         val list = MutableList(week-1, init = { CalendarDAO(year,month,0,0) })
         for (i in 1..maxDate) {
             val week_day = (week-1+i) % 7

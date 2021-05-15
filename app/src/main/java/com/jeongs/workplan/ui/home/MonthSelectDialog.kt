@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jeongs.workplan.R
 
@@ -15,7 +14,7 @@ class MonthSelectDialog(year:Int,month:Int, val Date : (String) ->Unit) : Bottom
         var year = year
         var month = month
         lateinit var  yearTextureView: TextView
-        private lateinit var homeViewModel: HomeViewModel
+        private lateinit var homeViewModel: SharedViewModel
 
 
 
