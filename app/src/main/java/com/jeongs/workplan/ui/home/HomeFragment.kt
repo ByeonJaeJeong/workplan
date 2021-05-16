@@ -15,15 +15,15 @@ import android.icu.util.Calendar
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.viewpager2.widget.ViewPager2
+import kotlinx.android.synthetic.main.fragment_home.*
 
 // 추가로 만들어야 하는 내용
 // scroll event 를 이용해서 달력 월이동
 // 일 눌렸을때 하는 역할(calendar 의 주기능 추가 할예정)
 // 통계와 더보기 버튼 역할
 
-//현재 오류
-//메인에서 월 변경후 통계나 더보기 누른후 메인으로 돌아오면 월이 다시최근 월로 변경되어있음
-//viewmodel 을 공용으로 쓰는걸 만들어야함
+//viewpager2 를 이용한 recycleview로 변경할 예정
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
@@ -65,9 +65,14 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewpager2.adapter= CalendarAdapter()
+        viewpager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
+        viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+            }
+        })
 
-        adapter= CalendarAdapter(view)
-        root.calendar.adapter =adapter
         calendar = Calendar.getInstance()
         //현재 날짜 정보 입력
         calendar.set(Calendar.YEAR,homeViewModel.year)
