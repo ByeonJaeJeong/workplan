@@ -7,4 +7,5 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="back_btn">닫기</string>
     <string name="check_btn">완료</string>
+    <string formatted="false" name="calendar_year_month_format">yyyy년 MM월</string>
 </resources>

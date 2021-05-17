@@ -46,18 +46,18 @@ class HomeFragment : Fragment() , View.OnClickListener{
     ): View? {
          root  = inflater.inflate(R.layout.fragment_home, container, false)
 
-        if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
-            //처음 접속시 데이터가 없으므로 현재날짜를 반환
-             calendar = Calendar.getInstance()
-            var year = calendar.get(Calendar.YEAR)
-            var month = calendar.get(Calendar.MONTH)+1
-            homeViewModel.selectCalendar(year,month)
-        }
+//        if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
+//            //처음 접속시 데이터가 없으므로 현재날짜를 반환
+//             calendar = Calendar.getInstance()
+//            var year = calendar.get(Calendar.YEAR)
+//            var month = calendar.get(Calendar.MONTH)+1
+//            homeViewModel.selectCalendar(year,month)
+//        }
 
-        var select_date:TextView = root.findViewById(R.id.select_date)
+        /*var select_date:TextView = root.findViewById(R.id.select_date)
         select_date.text=homeViewModel.year.toString()+"년 "+homeViewModel.month.toString()+"월"
 
-        select_date.setOnClickListener(this)
+        select_date.setOnClickListener(this)*/
 
         return root
     }
@@ -65,15 +65,9 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewpager2.adapter= CalendarAdapter()
-        viewpager2.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-        viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-            }
-        })
+        initView()
 
-        calendar = Calendar.getInstance()
+       /* calendar = Calendar.getInstance()
         //현재 날짜 정보 입력
         calendar.set(Calendar.YEAR,homeViewModel.year)
         calendar.set(Calendar.MONTH,homeViewModel.month-1)
@@ -89,13 +83,13 @@ class HomeFragment : Fragment() , View.OnClickListener{
             val week_day = (week-1+i) % 7
             list.add(CalendarDAO(year,month,i,week_day))
         }
-        adapter.submitList(list)
+        adapter.submitList(list)*/
     }
 
 
 
     override fun onClick(v: View?) {
-        when(v?.id){
+      /*  when(v?.id){
             R.id.select_date->{
                 //월 변경 메소드
                 val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month){
@@ -108,14 +102,21 @@ class HomeFragment : Fragment() , View.OnClickListener{
                 }
                 activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
             }
-        }
+        }*/
     }
 
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+  /*  fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
         var ft: FragmentTransaction = fragmentManager.beginTransaction()
         ft.detach(fragment).attach(fragment).commit()
+    }*/
+    fun initView(){
+        val firstFragmentStateAdapter = FragemntStateAdapter(requireActivity())
+        viewpager2.adapter  = firstFragmentStateAdapter
+        viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
+        firstFragmentStateAdapter.apply {
+            viewpager2.setCurrentItem(this.firstFragmentPosition,false)
+        }
     }
-
 
 
 }
