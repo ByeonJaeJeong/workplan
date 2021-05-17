@@ -111,13 +111,10 @@
                     android:textSize="9sp" />
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/calendar"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewpager2"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="7"
-                tools:listitem="@layout/item_day" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
