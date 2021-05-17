@@ -7,21 +7,27 @@ import android.graphics.Color
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.provider.CalendarContract
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.adapters.ViewBindingAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import com.jeongs.workplan.TestActivity2
 import com.jeongs.workplan.db.CalendarDAO
 
-class CalendarAdapter(val view: View) :
-        ListAdapter<CalendarDAO, ViewHolder>(
-                CalendarAdapterDiffcallback()) {
+class CalendarAdapter : RecyclerView.Adapter<CalendarAdapter.PagerViewHolder>() {
 
+    inner class PagerViewHolder(itemView :View): RecyclerView.ViewHolder(itemView){
+
+
+
+    }
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -65,7 +71,16 @@ class CalendarAdapter(val view: View) :
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagerViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_home_view,parent,false)
+        return PagerViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: PagerViewHolder, position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getItemCount(): Int {
+        TODO("Not yet implemented")
     }
 }
