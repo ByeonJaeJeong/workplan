@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
+import com.jeongs.workplan.R.drawable.calendar_item_gray
 import com.jeongs.workplan.TestActivity2
 import com.jeongs.workplan.db.CalendarDAO
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
@@ -57,7 +58,7 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
 
     override fun onBindViewHolder(holder: CalendarItemHolder, position: Int) {
         //item_day 높이 지정
-        val h = (calendarLayout.height / 6) -20
+        val h = (calendarLayout.height / 6)
         holder.itemView.layoutParams.height = h
 
         holder?.bind(dataList[position], position, context)
@@ -94,8 +95,7 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
             }
             //현재 월의 1일 이전, 현재 월의 마지막일 이후 값의 텍스트를 회색처리
             if(position < firstDateIndex || position > lastDateIndex){
-                itemCalendarDateText.setTextAppearance(R.style.LightColorTextViewStyle)
-            }else{
+                itemCalendarDateText.setBackgroundResource(R.drawable.calendar_item_gray)
                 //아닌경우 검정색
                 itemCalendarDateText.setTextColor(Color.BLACK)
             }
