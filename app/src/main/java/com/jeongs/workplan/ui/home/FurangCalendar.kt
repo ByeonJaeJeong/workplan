@@ -2,7 +2,8 @@ package com.jeongs.workplan.ui.home
 
 import java.util.*
 
-class FurangCalendar(date:Date) {
+
+class FurangCalendar(date: Date) {
     companion object {
         const val DAYS_OF_WEEK = 7
         const val LOW_OF_CALENDAR = 6

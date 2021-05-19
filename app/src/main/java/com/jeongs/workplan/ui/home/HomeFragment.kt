@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() , View.OnClickListener{
 
-    private lateinit var  homeViewModel: SharedViewModel
+    private lateinit var  sharedViewModel: SharedViewModel
     private lateinit var adapter: CalendarAdapter
     lateinit var calendar: Calendar
     lateinit var root:View
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.run {
-            homeViewModel= ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
+            sharedViewModel= ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
         }
     }
 
@@ -46,18 +46,13 @@ class HomeFragment : Fragment() , View.OnClickListener{
     ): View? {
          root  = inflater.inflate(R.layout.fragment_home, container, false)
 
-//        if (homeViewModel.year.toInt() == 0 && homeViewModel.month.toInt() == 0){
-//            //처음 접속시 데이터가 없으므로 현재날짜를 반환
-//             calendar = Calendar.getInstance()
-//            var year = calendar.get(Calendar.YEAR)
-//            var month = calendar.get(Calendar.MONTH)+1
-//            homeViewModel.selectCalendar(year,month)
-//        }
-
-        /*var select_date:TextView = root.findViewById(R.id.select_date)
-        select_date.text=homeViewModel.year.toString()+"년 "+homeViewModel.month.toString()+"월"
-
-        select_date.setOnClickListener(this)*/
+        if (sharedViewModel.year.toInt() == 0 && sharedViewModel.month.toInt() == 0){
+            //처음 접속시 데이터가 없으므로 현재날짜를 반환
+            calendar = Calendar.getInstance()
+            var year = calendar.get(Calendar.YEAR)
+            var month = calendar.get(Calendar.MONTH)+1
+            sharedViewModel.selectCalendar(year,month)
+       }
 
         return root
     }
@@ -65,25 +60,8 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView()
+        initView(sharedViewModel)
 
-       /* calendar = Calendar.getInstance()
-        //현재 날짜 정보 입력
-        calendar.set(Calendar.YEAR,homeViewModel.year)
-        calendar.set(Calendar.MONTH,homeViewModel.month-1)
-        calendar.set(Calendar.DAY_OF_MONTH,1)
-
-        val year=calendar.get(Calendar.YEAR)
-        val maxDate =calendar.getActualMaximum(Calendar.DATE)
-        val week =calendar.get(Calendar.DAY_OF_WEEK)
-        val month = calendar.get(Calendar.MONTH)+1
-
-        val list = MutableList(week-1, init = { CalendarDAO(year,month,0,0) })
-        for (i in 1..maxDate) {
-            val week_day = (week-1+i) % 7
-            list.add(CalendarDAO(year,month,i,week_day))
-        }
-        adapter.submitList(list)*/
     }
 
 
@@ -105,11 +83,8 @@ class HomeFragment : Fragment() , View.OnClickListener{
         }*/
     }
 
-  /*  fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-    }*/
-    fun initView(){
+
+    fun initView(sharedViewModel: SharedViewModel){
         val firstFragmentStateAdapter = FragemntStateAdapter(requireActivity())
         viewpager2.adapter  = firstFragmentStateAdapter
         viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
