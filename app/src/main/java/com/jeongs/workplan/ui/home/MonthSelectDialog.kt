@@ -1,22 +1,33 @@
 package com.jeongs.workplan.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jeongs.workplan.R
+import java.util.*
 
-class MonthSelectDialog(year:Int,month:Int, val Date : (String) ->Unit) : BottomSheetDialogFragment(),View.OnClickListener {
-        var year = year
-        var month = month
+class MonthSelectDialog(date : String) : BottomSheetDialogFragment(),View.OnClickListener {
+        var year = date.substring(0,4).toInt()
+        var month = date.substring(6,8).toInt()
+        var select_year = year
+        var select_month = 0
         lateinit var  yearTextureView: TextView
-        private lateinit var homeViewModel: SharedViewModel
+        private lateinit var  sharedViewModel: SharedViewModel
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity.run{
+            sharedViewModel= ViewModelProvider(requireActivity(), ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
+        }
+    }
 
 
     override fun onCreateView(
@@ -32,7 +43,7 @@ class MonthSelectDialog(year:Int,month:Int, val Date : (String) ->Unit) : Bottom
         yearTextureView = view.findViewById(R.id.month_grid_year)
 
 
-        yearTextureView.text=year.toString()+"년"
+        yearTextureView.text=select_year.toString()+"년"
 
         val leftButton : ImageButton = view.findViewById(R.id.grid_year_leftBtn)
         val rightButton : ImageButton = view.findViewById(R.id.grid_year_rightBtn)
@@ -68,62 +79,89 @@ class MonthSelectDialog(year:Int,month:Int, val Date : (String) ->Unit) : Bottom
 
     }
 
+    fun save() {
+        Log.e("sharedViewmodel","dissmiss작동")
+        val firstTime = Calendar.getInstance()
+        val first_month = firstTime.get(Calendar.YEAR)*12+firstTime.get(Calendar.MONTH)
+        val selectDate = Calendar.getInstance().apply {
+            set(Calendar.YEAR,select_year)
+            set(Calendar.MONTH,select_month+1)
+        }
+        val select_month = selectDate.get(Calendar.YEAR)*12+selectDate.get(Calendar.MONTH)
+        var resultMonth = first_month-select_month
+        Log.e("resultMonth", resultMonth.toString())
+        sharedViewModel.pageIndex= -resultMonth
+
+    }
+
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.grid_year_leftBtn->{
-                year=year-1
-                yearTextureView.text=year.toString()+"년"
+                select_year -= 1
+                yearTextureView.text=select_year.toString()+"년"
             }
             R.id.grid_year_rightBtn->{
-                year=year+1
-                yearTextureView.text=year.toString()+"년"
+                select_year += 1
+                yearTextureView.text=select_year.toString()+"년"
             }
             R.id.monthBtn_1->{
-                Date(year.toString()+"/1")
+               select_month = 1
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_2->{
-                Date(year.toString()+"/2")
+                select_month =2
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_3->{
-                Date(year.toString()+"/3")
+                select_month = 3
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_4->{
-                Date(year.toString()+"/4")
+                select_month = 4
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_5->{
-                Date(year.toString()+"/5")
+                select_month = 5
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_6->{
-                Date(year.toString()+"/6")
+                select_month = 6
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_7->{
-                Date(year.toString()+"/7")
+                select_month = 7
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_8->{
-                Date(year.toString()+"/8")
+                select_month = 8
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_9->{
-                Date(year.toString()+"/9")
+                select_month = 9
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_10->{
-                Date(year.toString()+"/10")
+                select_month = 10
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_11->{
-                Date(year.toString()+"/11")
+                select_month = 11
+                save()
                 dialog?.dismiss()
             }
             R.id.monthBtn_12->{
-                Date(year.toString()+"/12")
+                select_month = 12
+                save()
                 dialog?.dismiss()
             }
         }

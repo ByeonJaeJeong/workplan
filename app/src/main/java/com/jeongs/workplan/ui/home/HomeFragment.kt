@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.icu.util.Calendar
 import android.view.*
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -60,7 +61,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
 
 
     override fun onClick(v: View?) {
-      /*  when(v?.id){
+        /*when(v?.id){
             R.id.select_date->{
                 //월 변경 메소드
                 val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month){
@@ -82,7 +83,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
         viewpager2.adapter  = firstFragmentStateAdapter
         viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
         firstFragmentStateAdapter.apply {
-            viewpager2.setCurrentItem(this.firstFragmentPosition+sharedViewModel.getPageIndex(),false)
+            viewpager2.setCurrentItem(this.firstFragmentPosition+sharedViewModel.pageIndex,false)
         }
     }
 
