@@ -46,12 +46,8 @@ class CalendarFragment : Fragment() {
         activity?.run {
             sharedViewModel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
            //pageIndex가 0이면 데이터를 집어넣음
-            if(pageIndex == Int.MAX_VALUE/2) {
-                Log.e("page","데이터 집어넣기")
-                sharedate.set(Calendar.YEAR, sharedViewModel.year)
-                sharedate.set(Calendar.MONTH, sharedViewModel.month-1)
-                Log.e("page","집어넣은 데이터 "+sharedate.get(Calendar.YEAR).toString()+"년"+(sharedate.get(Calendar.MONTH)+1).toString()+"월")
-            }
+            if(pageIndex == Int.MAX_VALUE /2)
+            pageIndex = sharedViewModel.getPageIndex() + (Int.MAX_VALUE / 2)
         }
     }
 
@@ -74,7 +70,7 @@ class CalendarFragment : Fragment() {
         val calendar= Calendar.getInstance()
         calendar.time= date
         Log.e("page","현재 데이터 "+calendar.get(Calendar.YEAR).toString()+"년"+(calendar.get(Calendar.MONTH)+1).toString()+"월")
-        sharedViewModel.selectCalendar(calendar.get(Calendar.YEAR),(calendar.get(Calendar.MONTH)+1))
+        sharedViewModel.setPageIndex(pageIndex)
         //포멧 적용
         var datetime: String = SimpleDateFormat(
                 mContext.getString(R.string.calendar_year_month_format),

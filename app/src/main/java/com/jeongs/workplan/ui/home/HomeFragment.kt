@@ -46,13 +46,6 @@ class HomeFragment : Fragment() , View.OnClickListener{
     ): View? {
          root  = inflater.inflate(R.layout.fragment_home, container, false)
 
-        if (sharedViewModel.year.toInt() == 0 && sharedViewModel.month.toInt() == 0){
-            //처음 접속시 데이터가 없으므로 현재날짜를 반환
-            calendar = Calendar.getInstance()
-            var year = calendar.get(Calendar.YEAR)
-            var month = calendar.get(Calendar.MONTH)+1
-            sharedViewModel.selectCalendar(year,month)
-       }
 
         return root
     }
@@ -89,7 +82,7 @@ class HomeFragment : Fragment() , View.OnClickListener{
         viewpager2.adapter  = firstFragmentStateAdapter
         viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
         firstFragmentStateAdapter.apply {
-            viewpager2.setCurrentItem(this.firstFragmentPosition,false)
+            viewpager2.setCurrentItem(this.firstFragmentPosition+sharedViewModel.getPageIndex(),false)
         }
     }
 

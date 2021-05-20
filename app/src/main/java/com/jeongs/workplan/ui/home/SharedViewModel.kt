@@ -13,14 +13,20 @@ import java.time.Year
 //LiveData랑 같이 사용한다고함 *공부 추가로 할것
 class SharedViewModel : ViewModel() {
 
-    var year : Int = 0
-    var month : Int =0
-    var day : Int = 0
-    var dayOfWeek : Int =0
-
-    fun selectCalendar(year2: Int,month2: Int){
-        year= year2
-        month=month2
+    private var year : Int = 0
+    private var month : Int =0
+    private var day : Int = 0
+    private var dayOfWeek : Int =0
+    private  var pageIndex = 0
+    fun selectCalendar(year: Int,month: Int){
+        this.year= year
+        this.month=month
+    }
+    fun setPageIndex(pageIndex : Int){
+        this.pageIndex = pageIndex
+    }
+    fun getPageIndex(): Int {
+        return pageIndex
     }
 
 
