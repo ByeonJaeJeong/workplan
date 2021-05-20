@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
@@ -21,11 +22,12 @@ class CalendarFragment : Fragment() {
 
     var pageIndex = 0
     lateinit var  currentDate : Date
-
+    private lateinit var  sharedViewModel: SharedViewModel
     lateinit var calendar_year_month_text : TextView
     lateinit var calendar_view : RecyclerView
     lateinit var calendar_layout : LinearLayout
     lateinit var calendarAdapter: CalendarAdapter
+    private var sharedate = Calendar.getInstance()
 
     companion object{
         var instance : CalendarFragment? = null
@@ -41,6 +43,16 @@ class CalendarFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         instance = this
+        activity?.run {
+            sharedViewModel= ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
+           //pageIndex가 0이면 데이터를 집어넣음
+            if(pageIndex == Int.MAX_VALUE/2) {
+                Log.e("page","데이터 집어넣기")
+                sharedate.set(Calendar.YEAR, sharedViewModel.year)
+                sharedate.set(Calendar.MONTH, sharedViewModel.month-1)
+                Log.e("page","집어넣은 데이터 "+sharedate.get(Calendar.YEAR).toString()+"년"+(sharedate.get(Calendar.MONTH)+1).toString()+"월")
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,16 +66,21 @@ class CalendarFragment : Fragment() {
         calendar_year_month_text = view.select_date
         calendar_view = view.calendar
         calendar_layout= view.calendar_layout
-        val date = Calendar.getInstance().run {
+        val date = sharedate.run {
             add(Calendar.MONTH, pageIndex)
             time
         }
         currentDate = date
+        val calendar= Calendar.getInstance()
+        calendar.time= date
+        Log.e("page","현재 데이터 "+calendar.get(Calendar.YEAR).toString()+"년"+(calendar.get(Calendar.MONTH)+1).toString()+"월")
+        sharedViewModel.selectCalendar(calendar.get(Calendar.YEAR),(calendar.get(Calendar.MONTH)+1))
         //포멧 적용
         var datetime: String = SimpleDateFormat(
                 mContext.getString(R.string.calendar_year_month_format),
                 Locale.KOREA
         ).format(date.time)
+        Log.e("pageIndex",pageIndex.toString())
         calendar_year_month_text.setText(datetime)
         calendarAdapter= CalendarAdapter(view.context,calendar_layout,date)
         calendar_view.adapter=calendarAdapter
