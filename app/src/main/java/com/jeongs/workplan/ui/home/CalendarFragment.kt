@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
-import kotlinx.android.synthetic.main.fragment_home_view.*
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -58,8 +57,11 @@ class CalendarFragment : Fragment() {
         initView(view)
         val selectDate = view.findViewById<TextView>(R.id.select_date)
         selectDate.setOnClickListener {
-            val bottomDialog : MonthSelectDialog = MonthSelectDialog(it.select_date.text.toString())
+            val bottomDialog : MonthSelectDialog = MonthSelectDialog(it.select_date.text.toString()){
+                refreshFragment(requireParentFragment(),parentFragmentManager)
+            }
             activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
+
         }
         return view
     }
