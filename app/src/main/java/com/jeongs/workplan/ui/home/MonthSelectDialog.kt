@@ -13,7 +13,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jeongs.workplan.R
 import java.util.*
 
-class MonthSelectDialog(date : String) : BottomSheetDialogFragment(),View.OnClickListener {
+class MonthSelectDialog(date: String, function: () -> Unit) : BottomSheetDialogFragment(),View.OnClickListener {
         var year = date.substring(0,4).toInt()
         var month = date.substring(6,8).toInt()
         var select_year = year
@@ -82,10 +82,10 @@ class MonthSelectDialog(date : String) : BottomSheetDialogFragment(),View.OnClic
     fun save() {
         Log.e("sharedViewmodel","dissmiss작동")
         val firstTime = Calendar.getInstance()
-        val first_month = firstTime.get(Calendar.YEAR)*12+firstTime.get(Calendar.MONTH)
+        val first_month = firstTime.get(Calendar.YEAR)*12+firstTime.get(Calendar.MONTH)+1
         val selectDate = Calendar.getInstance().apply {
             set(Calendar.YEAR,select_year)
-            set(Calendar.MONTH,select_month+1)
+            set(Calendar.MONTH,select_month)
         }
         val select_month = selectDate.get(Calendar.YEAR)*12+selectDate.get(Calendar.MONTH)
         var resultMonth = first_month-select_month

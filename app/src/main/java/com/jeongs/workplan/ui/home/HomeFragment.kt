@@ -76,7 +76,10 @@ class HomeFragment : Fragment() , View.OnClickListener{
             }
         }*/
     }
-
+    public fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
+    }
 
     fun initView(sharedViewModel: SharedViewModel){
         val firstFragmentStateAdapter = FragemntStateAdapter(requireActivity())
