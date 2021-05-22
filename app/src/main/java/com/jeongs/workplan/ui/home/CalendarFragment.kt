@@ -58,7 +58,7 @@ class CalendarFragment : Fragment() {
         val selectDate = view.findViewById<TextView>(R.id.select_date)
         selectDate.setOnClickListener {
             val bottomDialog : MonthSelectDialog = MonthSelectDialog(it.select_date.text.toString()){
-                refreshFragment(requireParentFragment(),parentFragmentManager)
+                parentFragment?.let { it1 -> refreshFragment(it1.requireParentFragment(),parentFragmentManager) }
             }
             activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
 
