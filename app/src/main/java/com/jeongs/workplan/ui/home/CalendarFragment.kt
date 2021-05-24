@@ -1,22 +1,29 @@
 package com.jeongs.workplan.ui.home
 import android.content.Context
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.function.UnaryOperator
 
 class CalendarFragment : Fragment() {
     lateinit var mContext: Context
@@ -51,24 +58,22 @@ class CalendarFragment : Fragment() {
             pageIndex = sharedViewModel.pageIndex + (Int.MAX_VALUE / 2)
         }
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home_view , container , false)
         initView(view)
         val selectDate = view.findViewById<TextView>(R.id.select_date)
         selectDate.setOnClickListener {
-            val bottomDialog : MonthSelectDialog = MonthSelectDialog(it.select_date.text.toString()){
-                parentFragment?.let { it1 -> refreshFragment(it1.requireParentFragment(),parentFragmentManager) }
-            }
+            val bottomDialog : MonthSelectDialog = MonthSelectDialog(it.select_date.text.toString())
             activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
-
+            fragmentManager?.executePendingTransactions()
+            bottomDialog.dialog?.setOnDismissListener(DialogInterface.OnDismissListener(){
+                pageIndex = sharedViewModel.pageIndex + (Int.MAX_VALUE / 2)
+                initView(view)
+            })
         }
         return view
     }
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-    }
+
     fun initView(view: View){
         pageIndex -= (Int.MAX_VALUE / 2)
         calendar_year_month_text = view.select_date

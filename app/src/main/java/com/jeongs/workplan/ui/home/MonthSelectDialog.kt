@@ -1,5 +1,6 @@
 package com.jeongs.workplan.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,12 +9,18 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import java.util.*
 
-class MonthSelectDialog(date: String, function: () -> Unit) : BottomSheetDialogFragment(),View.OnClickListener {
+class MonthSelectDialog(date: String) : BottomSheetDialogFragment(),View.OnClickListener {
         var year = date.substring(0,4).toInt()
         var month = date.substring(6,8).toInt()
         var select_year = year
@@ -92,6 +99,10 @@ class MonthSelectDialog(date: String, function: () -> Unit) : BottomSheetDialogF
         Log.e("resultMonth", resultMonth.toString())
         sharedViewModel.pageIndex= -resultMonth
 
+    }
+    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
+        var ft: FragmentTransaction = fragmentManager.beginTransaction()
+        ft.detach(fragment).attach(fragment).commit()
     }
 
     override fun onClick(v: View?) {

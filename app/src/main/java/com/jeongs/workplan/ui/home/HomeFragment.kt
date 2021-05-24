@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 
 //viewpager2 를 이용한 recycleview로 변경할 예정
 
-class HomeFragment : Fragment() , View.OnClickListener{
+class HomeFragment : Fragment(){
 
     private lateinit var  sharedViewModel: SharedViewModel
     private lateinit var adapter: CalendarAdapter
@@ -59,27 +59,6 @@ class HomeFragment : Fragment() , View.OnClickListener{
     }
 
 
-
-    override fun onClick(v: View?) {
-        /*when(v?.id){
-            R.id.select_date->{
-                //월 변경 메소드
-                val bottomDialog : MonthSelectDialog = MonthSelectDialog(homeViewModel.year,homeViewModel.month){
-                    var year = it.split("/")[0]
-                    var month = it.split("/")[1]
-
-                    homeViewModel.year=year.toInt()
-                    homeViewModel.month=month.toInt()
-                    refreshFragment(this,parentFragmentManager)
-                }
-                activity?.let { bottomDialog.show(it.supportFragmentManager,bottomDialog.tag)}
-            }
-        }*/
-    }
-    public fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-    }
 
     fun initView(sharedViewModel: SharedViewModel){
         val firstFragmentStateAdapter = FragemntStateAdapter(requireActivity())
