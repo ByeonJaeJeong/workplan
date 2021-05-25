@@ -16,8 +16,6 @@ class SharedViewModel(var year :Int = 0,
                       var pageIndex :Int = 0) : ViewModel() {
 
 
-    private var day : Int = 0
-    private var dayOfWeek : Int =0
     fun selectCalendar(year: Int,month: Int){
         this.year= year
         this.month=month

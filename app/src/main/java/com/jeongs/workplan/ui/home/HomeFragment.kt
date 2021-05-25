@@ -3,19 +3,13 @@ package com.jeongs.workplan.ui.home
 
 import android.os.Bundle
 
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.jeongs.workplan.R
-import com.jeongs.workplan.db.CalendarDAO
-import kotlinx.android.synthetic.main.fragment_home.view.*
 import android.icu.util.Calendar
 import android.view.*
-import android.widget.Toast
-import androidx.core.view.get
-import androidx.fragment.app.activityViewModels
+import androidx.core.view.isEmpty
+import androidx.lifecycle.Observer
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -52,22 +46,23 @@ class HomeFragment : Fragment(){
     }
 
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView(sharedViewModel)
-
     }
 
 
 
     fun initView(sharedViewModel: SharedViewModel){
-        val firstFragmentStateAdapter = FragemntStateAdapter(requireActivity())
+        val firstFragmentStateAdapter = FragmentStateAdapter(requireActivity())
         viewpager2.adapter  = firstFragmentStateAdapter
         viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
         firstFragmentStateAdapter.apply {
             viewpager2.setCurrentItem(this.firstFragmentPosition+sharedViewModel.pageIndex,false)
         }
     }
+
 
 
 }

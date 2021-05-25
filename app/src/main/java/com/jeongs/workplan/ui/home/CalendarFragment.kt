@@ -1,4 +1,5 @@
 package com.jeongs.workplan.ui.home
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,24 +9,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.function.UnaryOperator
 
-class CalendarFragment : Fragment() {
+class CalendarFragment() : Fragment() {
     lateinit var mContext: Context
 
     var pageIndex = 0
@@ -58,6 +53,7 @@ class CalendarFragment : Fragment() {
             pageIndex = sharedViewModel.pageIndex + (Int.MAX_VALUE / 2)
         }
     }
+    @SuppressLint("ResourceType")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home_view , container , false)
         initView(view)
@@ -69,7 +65,7 @@ class CalendarFragment : Fragment() {
             bottomDialog.dialog?.setOnDismissListener(DialogInterface.OnDismissListener(){
                 pageIndex = sharedViewModel.pageIndex + (Int.MAX_VALUE / 2)
                 initView(view)
-            })
+                 })
         }
         return view
     }
