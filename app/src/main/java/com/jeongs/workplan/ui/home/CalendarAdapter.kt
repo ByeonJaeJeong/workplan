@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.get
 import androidx.databinding.adapters.ViewBindingAdapter
 import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.ListAdapter
@@ -98,6 +99,25 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
                 itemCalendarDateText.setBackgroundResource(R.drawable.calendar_item_gray)
                 //아닌경우 검정색
                 itemCalendarDateText.setTextColor(Color.BLACK)
+                itemView.setOnClickListener {
+
+                }
+            }
+            if(position < firstDateIndex){
+                itemView.setOnClickListener {
+                    Toast.makeText(context,"이전달로 이동",Toast.LENGTH_SHORT).show()
+
+                }
+            }
+            else if(position > lastDateIndex){
+                itemView.setOnClickListener {
+                    Toast.makeText(context,"다음달로 이동",Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                itemView.setOnClickListener {
+                    Toast.makeText(context,"일자 클릭 이벤트 발생",Toast.LENGTH_SHORT).show()
+                }
             }
             //일요일
             if(position % 7 == 0) {
@@ -114,44 +134,4 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
 
 
 
-    /* @SuppressLint("ResourceAsColor")
- override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-     val item = getItem(position)
-     val calendar = Calendar.getInstance()
-     val nowDay = calendar.get(Calendar.DAY_OF_MONTH)
-     val nowYear =calendar.get(Calendar.YEAR)
-     val nowMonth=calendar.get(Calendar.MONTH)+1
-
-     // 0일경우 날짜표시 x
-     if (item.day == 0) {
-         holder.dateNumber.visibility = View.GONE
-     }
-     //일요일
-     if (item.week == 0) {
-         holder.dateNumber.setTextColor(R.color.FireBrick)
-     }
-     //토요일
-     if (item.week == 6) {
-         holder.dateNumber.setTextColor(R.color.blue)
-     }
-     //오늘 날짜에 표기
-     if (item.year == nowYear && item.month == nowMonth && item.day == nowDay){
-         holder.dateNumber.setBackgroundColor(R.color.ThemeColors)
-         holder.dateNumber.setTextColor(Color.WHITE)
-     }
-     holder.bind(item)
-     if(item.day != 0){
-         //item Click event
-         holder.itemView.setOnClickListener(View.OnClickListener {
-
-             val intent = Intent(it.context, TestActivity2::class.java)
-             intent.putExtra("year",item.year)
-             intent.putExtra("month",item.month)
-             intent.putExtra("day",item.day)
-
-             it.context.startActivity(intent)
-         })
-     }
-
- }*/
 }

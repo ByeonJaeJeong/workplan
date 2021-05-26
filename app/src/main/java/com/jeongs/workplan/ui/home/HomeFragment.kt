@@ -7,9 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jeongs.workplan.R
 import android.icu.util.Calendar
+import android.util.Log
 import android.view.*
-import androidx.core.view.isEmpty
-import androidx.lifecycle.Observer
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -26,6 +26,7 @@ class HomeFragment : Fragment(){
     private lateinit var adapter: CalendarAdapter
     lateinit var calendar: Calendar
     lateinit var root:View
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +62,7 @@ class HomeFragment : Fragment(){
         firstFragmentStateAdapter.apply {
             viewpager2.setCurrentItem(this.firstFragmentPosition+sharedViewModel.pageIndex,false)
         }
+
     }
 
 
