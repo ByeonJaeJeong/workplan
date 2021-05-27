@@ -20,7 +20,7 @@ import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
 import java.util.*
 
-class MonthSelectDialog(date: String) : BottomSheetDialogFragment(),View.OnClickListener {
+class MonthSelectDialog(date: String,val itemClick: (String) ->Unit) : BottomSheetDialogFragment(),View.OnClickListener {
         var year = date.substring(0,4).toInt()
         var month = date.substring(6,8).toInt()
         var select_year = year
@@ -86,24 +86,7 @@ class MonthSelectDialog(date: String) : BottomSheetDialogFragment(),View.OnClick
 
     }
 
-    fun save() {
-        Log.e("sharedViewmodel","dissmiss작동")
-        val firstTime = Calendar.getInstance()
-        val first_month = firstTime.get(Calendar.YEAR)*12+firstTime.get(Calendar.MONTH)+1
-        val selectDate = Calendar.getInstance().apply {
-            set(Calendar.YEAR,select_year)
-            set(Calendar.MONTH,select_month)
-        }
-        val select_month = selectDate.get(Calendar.YEAR)*12+selectDate.get(Calendar.MONTH)
-        var resultMonth = first_month-select_month
-        Log.e("resultMonth", resultMonth.toString())
-        sharedViewModel.pageIndex= -resultMonth
 
-    }
-    fun refreshFragment(fragment: Fragment, fragmentManager: FragmentManager) {
-        var ft: FragmentTransaction = fragmentManager.beginTransaction()
-        ft.detach(fragment).attach(fragment).commit()
-    }
 
     override fun onClick(v: View?) {
         when(v?.id){
@@ -116,63 +99,51 @@ class MonthSelectDialog(date: String) : BottomSheetDialogFragment(),View.OnClick
                 yearTextureView.text=select_year.toString()+"년"
             }
             R.id.monthBtn_1->{
-               select_month = 1
-                save()
+                itemClick(select_year.toString()+"00")
                 dialog?.dismiss()
             }
             R.id.monthBtn_2->{
-                select_month =2
-                save()
+                itemClick(select_year.toString()+"01")
                 dialog?.dismiss()
             }
             R.id.monthBtn_3->{
-                select_month = 3
-                save()
+                itemClick(select_year.toString()+"02")
                 dialog?.dismiss()
             }
             R.id.monthBtn_4->{
-                select_month = 4
-                save()
+                itemClick(select_year.toString()+"03")
                 dialog?.dismiss()
             }
             R.id.monthBtn_5->{
-                select_month = 5
-                save()
+                itemClick(select_year.toString()+"04")
                 dialog?.dismiss()
             }
             R.id.monthBtn_6->{
-                select_month = 6
-                save()
+                itemClick(select_year.toString()+"05")
                 dialog?.dismiss()
             }
             R.id.monthBtn_7->{
-                select_month = 7
-                save()
+                itemClick(select_year.toString()+"06")
                 dialog?.dismiss()
             }
             R.id.monthBtn_8->{
-                select_month = 8
-                save()
+                itemClick(select_year.toString()+"07")
                 dialog?.dismiss()
             }
             R.id.monthBtn_9->{
-                select_month = 9
-                save()
+                itemClick(select_year.toString()+"08")
                 dialog?.dismiss()
             }
             R.id.monthBtn_10->{
-                select_month = 10
-                save()
+                itemClick(select_year.toString()+"09")
                 dialog?.dismiss()
             }
             R.id.monthBtn_11->{
-                select_month = 11
-                save()
+                itemClick(select_year.toString()+"10")
                 dialog?.dismiss()
             }
             R.id.monthBtn_12->{
-                select_month = 12
-                save()
+                itemClick(select_year.toString()+"11")
                 dialog?.dismiss()
             }
         }

@@ -1,12 +1,7 @@
 package com.jeongs.workplan.ui.home
 
-import android.content.ClipData
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import java.time.Month
-import java.time.Year
+import java.util.*
 
 //뷰 모델 클래스는 수명주기와 상관없이 데이터를 사용하기 위해 사용함
 //주로 수명주기를 고려하여 UI 관련 데이터를 저장하고 관리하도록 설계
@@ -16,16 +11,22 @@ class SharedViewModel(var year :Int = 0,
                       var pageIndex :Int = 0) : ViewModel() {
 
 
+
+    init {
+        val calendar= Calendar.getInstance()
+        year = calendar.get(Calendar.YEAR)
+        month = calendar.get(Calendar.MONTH)
+    }
     fun selectCalendar(year: Int,month: Int){
         this.year= year
         this.month=month
     }
-  /*  fun setPageIndex(pageIndex : Int){
-        this.pageIndex = pageIndex
+    //calendar 는 선택된 위치.calendar2 기준치
+    fun get_position(calendar: android.icu.util.Calendar, calendar2: android.icu.util.Calendar):Int{
+
+        return ((calendar.get(Calendar.YEAR)-calendar2.get(Calendar.YEAR))*12+(calendar.get(Calendar.MONTH)-calendar2.get(Calendar.MONTH)))
     }
-    fun getPageIndex(): Int {
-        return pageIndex
-    }*/
+
 
 
 }
