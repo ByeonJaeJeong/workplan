@@ -67,11 +67,7 @@ class HomeFragment : Fragment(){
                 val currentCalendar :Calendar =Calendar.getInstance()
                 currentCalendar.set(Calendar.YEAR,sharedViewModel.year)
                 currentCalendar.set(Calendar.MONTH, sharedViewModel.month)
-                Log.e("data-1",calendar.get(Calendar.YEAR).toString()+","+calendar.get(Calendar.MONTH).toString())
-                Log.e("data-2",currentCalendar.get(Calendar.YEAR).toString()+","+currentCalendar.get(Calendar.MONTH).toString())
                 viewpager2.currentItem= (Int.MAX_VALUE/2)+sharedViewModel.get_position(calendar,currentCalendar)
-                Log.e("data",sharedViewModel.get_position(calendar, currentCalendar).toString())
-                Log.e("data_position",viewpager2.currentItem.toString())
 
             }
             //다이어로그 출력
@@ -82,7 +78,6 @@ class HomeFragment : Fragment(){
 
     //calendar 생성하는 메소드
     fun initView(sharedViewModel: SharedViewModel){
-        Log.e("refresh 테스트","initView작동")
         firstFragmentStateAdapter = FragmentStateAdapter(requireActivity(),view)
         viewpager2.adapter  = firstFragmentStateAdapter
         viewpager2.orientation= ViewPager2.ORIENTATION_HORIZONTAL
@@ -91,7 +86,6 @@ class HomeFragment : Fragment(){
         }
         viewpager2.setPageTransformer { page, position ->
             if(position == 0.0f) {
-                Log.e("data-position",sharedViewModel.month.toString())
                 dateCalendar = Calendar.getInstance()
                 dateCalendar.set(Calendar.YEAR,sharedViewModel.year)
                 dateCalendar.set(Calendar.MONTH,sharedViewModel.month)

@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Workplan">
         <activity
-            android:name=".TestActivity2"
+            android:name=".DaySelectModal"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".MainActivity"

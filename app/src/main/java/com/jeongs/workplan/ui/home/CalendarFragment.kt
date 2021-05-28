@@ -1,9 +1,7 @@
 
 package com.jeongs.workplan.ui.home
-import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,10 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
-import com.jeongs.workplan.R.id.parent
-import com.jeongs.workplan.R.id.select_date
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarFragment(val parentView: View?) : Fragment() {
@@ -45,7 +40,6 @@ class CalendarFragment(val parentView: View?) : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.e("refresh 테스트","onCreate작동")
         instance = this
         activity?.run {
             sharedViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
@@ -53,7 +47,6 @@ class CalendarFragment(val parentView: View?) : Fragment() {
             sharedate.set(Calendar.MONTH,sharedViewModel.month)
         }
     }
-    @SuppressLint("ResourceType")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home_view, container, false)
         initView(view)
@@ -73,8 +66,7 @@ class CalendarFragment(val parentView: View?) : Fragment() {
         currentDate = date
         val calendar= Calendar.getInstance()
         calendar.time= date
-        Log.e("page","현재 데이터 "+calendar.get(Calendar.YEAR).toString()+"년"+(calendar.get(Calendar.MONTH)+1).toString()+"월")
-        calendarAdapter= CalendarAdapter(view.context,calendar_layout,date)
+        calendarAdapter= CalendarAdapter(view.context,calendar_layout,date,parentView)
         calendar_view.adapter=calendarAdapter
     }
 

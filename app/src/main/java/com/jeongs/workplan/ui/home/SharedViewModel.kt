@@ -23,7 +23,6 @@ class SharedViewModel(var year :Int = 0,
     }
     //calendar 는 선택된 위치.calendar2 기준치
     fun get_position(calendar: android.icu.util.Calendar, calendar2: android.icu.util.Calendar):Int{
-
         return ((calendar.get(Calendar.YEAR)-calendar2.get(Calendar.YEAR))*12+(calendar.get(Calendar.MONTH)-calendar2.get(Calendar.MONTH)))
     }
 

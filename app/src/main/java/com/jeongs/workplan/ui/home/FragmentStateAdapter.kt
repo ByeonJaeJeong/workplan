@@ -15,7 +15,6 @@ class FragmentStateAdapter(fragmentActivity: FragmentActivity,val view: View?) :
 
 
     override fun createFragment(position: Int): Fragment{
-        Log.e("refresh 테스트","createFragment작동")
         val calendarFragment = CalendarFragment(view)
         calendarFragment.pageIndex = position
         return calendarFragment
