@@ -78,50 +78,56 @@ class CalendarAdapter(val context: Context, val calendarLayout: LinearLayout, va
             var dateInt = dateString.toInt()
             var calendar = Calendar.getInstance()
 
+            //오늘 날짜 글자크기 굵게
             if( dataList[position] == dateInt){
                 itemCalendarDateText.setTypeface(itemCalendarDateText.typeface, Typeface.BOLD)
             }
+
             //현재 월의 1일 이전, 현재 월의 마지막일 이후 값의 텍스트를 회색처리
             if(position < firstDateIndex || position > lastDateIndex){
                 itemCalendarDateText.setBackgroundResource(R.drawable.calendar_item_gray)
                 //아닌경우 검정색
+                itemCalendarDateText.setTextColor(Color.GRAY)
+                itemCalendarDateText.setTypeface(itemCalendarDateText.typeface, Typeface.ITALIC)
+            }else{
                 itemCalendarDateText.setTextColor(Color.BLACK)
-                itemView.setOnClickListener {
-
+                //주말 색상변경
+                //일요일
+                if(position % 7 == 0) {
+                    itemCalendarDateText.setTextColor(Color.RED)
+                }
+                //토요일
+                if(position % 7 == 6){
+                    itemCalendarDateText.setTextColor(Color.BLUE)
                 }
             }
+            //이전달
             if(position < firstDateIndex){
                 itemView.setOnClickListener {
                     parentView?.findViewById<ViewPager2>(R.id.viewpager2).currentItem = parentView?.findViewById<ViewPager2>(R.id.viewpager2).currentItem-1
 
                 }
             }
+            //다음달
             else if(position > lastDateIndex){
                 itemView.setOnClickListener {
                     parentView?.findViewById<ViewPager2>(R.id.viewpager2).currentItem = parentView?.findViewById<ViewPager2>(R.id.viewpager2).currentItem+1
                 }
             }
+            //이번달
             else{
                 itemView.setOnClickListener {
                     val eventCalendar = Calendar.getInstance()  //현재날짜
                     eventCalendar.time = date   //date추가
                     eventCalendar.set(Calendar.DAY_OF_MONTH,data) //일자 변경
                     val simpledateformat:SimpleDateFormat= SimpleDateFormat("yyyy.MM.dd(E)", Locale.KOREA) //포멧변경
-                    Toast.makeText(it.context,simpledateformat.format(date),Toast.LENGTH_SHORT).show()
                     val intent = Intent(it.context,DaySelectModal::class.java)   //이동준비
                     intent.putExtra("date",simpledateformat.format(eventCalendar.time)) //데이터 입력
                     ContextCompat.startActivity(it.context,intent, Bundle.EMPTY)    //이동
 
                 }
             }
-            //일요일
-            if(position % 7 == 0) {
-                itemCalendarDateText.setTextColor(Color.RED)
-            }
-            //토요일
-            if(position % 7 == 6){
-                itemCalendarDateText.setTextColor(Color.BLUE)
-            }
+
 
         }
     }
