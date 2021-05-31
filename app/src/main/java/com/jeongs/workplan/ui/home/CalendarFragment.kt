@@ -53,7 +53,7 @@ class CalendarFragment(val parentView: View?) : Fragment() {
 
         return view
     }
-
+    //캘린더 어뎁터 연결
     fun initView(view: View){
         pageIndex -= (Int.MAX_VALUE / 2)
         calendar_year_month_text = parentView?.findViewById(R.id.select_date)!!

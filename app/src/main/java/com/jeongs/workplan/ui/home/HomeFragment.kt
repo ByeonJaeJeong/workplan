@@ -98,7 +98,7 @@ class HomeFragment : Fragment(){
 
 
     }
-
+    //뷰가 종료 될때 뷰모델에 데이터 저장
     override fun onDestroyView() {
         sharedViewModel.month= dateCalendar.get(Calendar.MONTH)
         sharedViewModel.year = dateCalendar.get(Calendar.YEAR)
