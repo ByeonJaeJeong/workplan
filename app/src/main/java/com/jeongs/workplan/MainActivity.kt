@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.jeongs.workplan.db.DayInfo
+import com.jeongs.workplan.db.DayInfoDB
 import com.jeongs.workplan.ui.home.SharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,10 +17,23 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private var backpressedTime: Long = 0
     private lateinit var  sharedViewModel: SharedViewModel
-
+    private var dayInfoDb: DayInfoDB? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //db연결
+      /*  dayInfoDb=DayInfoDB.getInstance(this)
+
+        var dayList = listOf<DayInfo>()
+        val r = Runnable {
+            dayList= dayInfoDb?.dayInfoDao()?.getAll()!!
+            //데이터에 읽고 쓸때는 쓰레드 사용
+        }
+        val thread= Thread(r)
+        thread.start()
+*/
+        //프래그먼트 연결
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
