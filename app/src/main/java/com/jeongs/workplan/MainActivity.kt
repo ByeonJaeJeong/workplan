@@ -11,6 +11,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.jeongs.workplan.db.DayInfo
 import com.jeongs.workplan.db.DayInfoDB
 import com.jeongs.workplan.ui.home.SharedViewModel
+import java.nio.file.Files
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -23,16 +24,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //db연결
-      /*  dayInfoDb=DayInfoDB.getInstance(this)
-
+        dayInfoDb=DayInfoDB.getInstance(this)
         var dayList = listOf<DayInfo>()
         val r = Runnable {
             dayList= dayInfoDb?.dayInfoDao()?.getAll()!!
-            //데이터에 읽고 쓸때는 쓰레드 사용
+            for(day in dayList){
+                Log.e("dayList",day.toString())
+            }
         }
         val thread= Thread(r)
         thread.start()
-*/
         //프래그먼트 연결
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)

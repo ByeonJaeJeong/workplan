@@ -10,7 +10,7 @@ interface DayInfoDAO{
     @Query("SELECT * FROM DayInfo")
     fun getAll(): List<DayInfo>
     @Insert
-    fun insert(dayInfo: DayInfo)
+    fun insert(dayInfo : DayInfo)
 
 
 }

@@ -40,7 +40,7 @@ class DaySelectModal : AppCompatActivity() {
         supportActionBar?.setHomeAsUpIndicator(R.drawable.x_btn)
         //supportActionBar?.setDisplayShowHomeEnabled(true)
         //db연결
-  //      dayInfoDb= DayInfoDB.getInstance(this)
+        dayInfoDb= DayInfoDB.getInstance(this)
 
         val intent : Intent = intent
         date = intent.getStringExtra("date").toString()
@@ -99,27 +99,31 @@ class DaySelectModal : AppCompatActivity() {
             R.id.menu_check_btn -> {
                 //저장후 다시돌아가는 메소드
 
-                val calendar = Calendar.getInstance()
-                calendar.time=start_date.time
-                calendar.set(Calendar.HOUR,start_time.get(Calendar.HOUR))
-                calendar.set(Calendar.MINUTE,start_time.get(Calendar.MINUTE))
-                val myFormat = "yyyy-MM-dd hh:mm"
-                val sdf =SimpleDateFormat(myFormat, Locale.KOREA)
-                //var dayInfo= DayInfo(null, Date.valueOf( sdf.format(calendar.time)), Date.valueOf("2020-01-06"),"서울(GMT+9:00)",false,null,null)
+                val start_calendar = Calendar.getInstance()
+                start_calendar.time=start_date.time
+                start_calendar.set(Calendar.HOUR,start_time.get(Calendar.HOUR))
+                start_calendar.set(Calendar.MINUTE,start_time.get(Calendar.MINUTE))
 
-/*
+                val end_calendar = Calendar.getInstance()
+                end_calendar.time= end_date.time
+                end_calendar.set(Calendar.HOUR,end_time.get(Calendar.HOUR))
+                end_calendar.set(Calendar.MINUTE,end_time.get(Calendar.MINUTE))
+
+                var dayInfo= DayInfo(0,start_calendar.timeInMillis,end_calendar.timeInMillis, "서울(GMT+9:00)",false,place_edit.text.toString(),memo_edit.text.toString())
+
+
                 val r = Runnable {
-                    dayInfoDb?.dayInfoDao()?.insert(dayInfo)
+                    val insert = dayInfoDb?.dayInfoDao()?.insert(dayInfo)
+                    Log.e("dayList","반환값"+insert.toString())
+                    Log.e("dayList","저장완료")
+                    val intent = Intent(baseContext, MainActivity::class.java)
+                    Log.e("tag", date.toString())
+                    intent.putExtra("date", date)
+                    Log.e("dayList","activity이동")
+                    startActivity(intent)
                 }
                 val thread= Thread(r)
-                thread.start()*/
-
-                val intent = Intent(baseContext, MainActivity::class.java)
-                Log.e("tag", date.toString())
-                intent.putExtra("date", date)
-                startActivity(intent)
-
-
+                thread.start()
             }
         }
 
