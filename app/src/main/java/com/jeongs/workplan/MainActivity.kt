@@ -18,23 +18,12 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
     private var backpressedTime: Long = 0
     private lateinit var  sharedViewModel: SharedViewModel
-    private var dayInfoDb: DayInfoDB? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //db연결
-        dayInfoDb=DayInfoDB.getInstance(this)
-        var dayList = listOf<DayInfo>()
-        //DB데이터 불러오는 작업
-        val r = Runnable {
-            dayList= dayInfoDb?.dayInfoDao()?.getAll()!!
-            for(day in dayList){
-                Log.e("dayList",day.toString())
-            }
-        }
-        val thread= Thread(r)
-        thread.start()
+
         //프래그먼트 연결
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val navController = findNavController(R.id.nav_host_fragment)
@@ -72,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val toast= Toast.makeText(baseContext, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
+        val toast= Toast.makeText(applicationContext, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
         if (System.currentTimeMillis() > backpressedTime + 2000) {
             backpressedTime = System.currentTimeMillis();
             toast.show()

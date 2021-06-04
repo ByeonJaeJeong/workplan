@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.*
 import androidx.sqlite.db.SupportSQLiteOpenHelper
 
-@Database(entities = [DayInfo::class], version = 4)
+@Database(entities = [DayInfo::class], version = 5)
 abstract class DayInfoDB : RoomDatabase() {
     abstract  fun dayInfoDao(): DayInfoDAO
     companion object {

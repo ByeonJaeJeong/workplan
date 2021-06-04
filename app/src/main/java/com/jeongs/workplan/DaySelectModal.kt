@@ -27,23 +27,21 @@ class DaySelectModal : AppCompatActivity() {
     private var dayInfoDb: DayInfoDB? = null //DB선언
      var start_date :Calendar = Calendar.getInstance()
      var end_date :Calendar = Calendar.getInstance()
-    var start_time :Calendar = Calendar.getInstance()
-    var end_time :Calendar = Calendar.getInstance()
+    val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+    val timeFormat = "a hh : mm"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_day_select)
-
+        resources.configuration.setLocale(Locale.KOREAN)
         setSupportActionBar(my_toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false) //기본타이틀 보여줄지 여부
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.setHomeAsUpIndicator(R.drawable.x_btn)
-        //supportActionBar?.setDisplayShowHomeEnabled(true)
         //db연결
         dayInfoDb= DayInfoDB.getInstance(this)
 
         val intent : Intent = intent
         date = intent.getStringExtra("date").toString()
-        val get_calendar : Calendar = Calendar.getInstance()
         val startDayBtn: TextView = findViewById(R.id.start_day)
         val endDayBtn : TextView = findViewById(R.id.end_day)
         val startTimeBtn : TextView = findViewById(R.id.start_time)
@@ -51,28 +49,41 @@ class DaySelectModal : AppCompatActivity() {
         val timeBtn : TextView = findViewById(R.id.time_edit)
 
         //초기설정
-        //시작일자
-        val myFormat = "yyyy.MM.dd(E)" // mention the format you need
+        //시분초 0으로 초기화
+        start_date.set(Calendar.HOUR,0)
+        start_date.set(Calendar.MINUTE,0)
+        start_date.set(Calendar.SECOND,0)
+        start_date.set(Calendar.MILLISECOND,0)
+        //시분초 0으로 초기화
+        end_date.set(Calendar.HOUR,0)
+        end_date.set(Calendar.MINUTE,0)
+        end_date.set(Calendar.SECOND,0)
+        end_date.set(Calendar.MILLISECOND,0)
+        //타입변환
+
         val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+        val time_sdf  =SimpleDateFormat(timeFormat, Locale.KOREAN)
+        //시작 , 종료  -연,월,일,시간,분 기본값
+        startTimeBtn.text = time_sdf.format(start_date.time)
+        endTimeBtn.text = time_sdf.format(end_date.time)
         startDayBtn.text=date
-        //종료일자
         endDayBtn.text=date
 
         startDayBtn.setOnClickListener{
             //시작일자
-            start_date=getDate(startDayBtn, get_calendar)
+            start_date=getDate(startDayBtn, start_date)
         }
         endDayBtn.setOnClickListener {
             //종료일자
-            end_date=getDate(endDayBtn, get_calendar)
+            end_date=getDate(endDayBtn, end_date)
         }
         startTimeBtn.setOnClickListener{
             //시작시간
-           start_time= getTime(startTimeBtn)
+           start_date= getTime(startTimeBtn, start_date)
         }
         endTimeBtn.setOnClickListener {
             //종료시간
-            end_time=getTime(endTimeBtn)
+            end_date=getTime(endTimeBtn, end_date)
         }
         timeBtn.setOnClickListener {
             //시간설정
@@ -93,38 +104,12 @@ class DaySelectModal : AppCompatActivity() {
             android.R.id.home -> {
                 //취소 하는 메소드
                 super.onBackPressed()
-
             }
             R.id.menu_check_btn -> {
-                //저장후 다시돌아가는 메소드
 
-                val start_calendar = Calendar.getInstance()
-                //날짜정보 입력
-                start_calendar.time=start_date.time
-                //시분초 0으로 초기화
-                start_calendar.set(Calendar.HOUR,0)
-                start_calendar.set(Calendar.MINUTE,0)
-                start_calendar.set(Calendar.SECOND,0)
-                start_calendar.set(Calendar.MILLISECOND,0)
-                //시 분 입력
-                start_calendar.set(Calendar.HOUR,start_time.get(Calendar.HOUR))
-                start_calendar.set(Calendar.MINUTE,start_time.get(Calendar.MINUTE))
-
+                val sdf= SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
                 val end_calendar = Calendar.getInstance()
-                //날짜정보 입력
-                end_calendar.time= end_date.time
-                //시분초 0으로 초기화
-                end_calendar.set(Calendar.HOUR,0)
-                end_calendar.set(Calendar.MINUTE,0)
-                end_calendar.set(Calendar.SECOND,0)
-                end_calendar.set(Calendar.MILLISECOND,0)
-                //시분 입력
-                end_calendar.set(Calendar.HOUR,end_time.get(Calendar.HOUR))
-                end_calendar.set(Calendar.MINUTE,end_time.get(Calendar.MINUTE))
-
-
-                var dayInfo= DayInfo(0,start_calendar.timeInMillis,end_calendar.timeInMillis, time_edit.text.toString(),false,place_edit.text.toString(),memo_edit.text.toString())
-
+                var dayInfo= DayInfo(0,sdf.format(start_date.time).toString(),sdf.format(end_date.time).toString(), time_edit.text.toString(),false,place_edit.text.toString(),memo_edit.text.toString())
 
                 val r = Runnable {
                     val insert = dayInfoDb?.dayInfoDao()?.insert(dayInfo)
@@ -144,29 +129,26 @@ class DaySelectModal : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     //
-    private fun getTime(textView: TextView) : Calendar{
-        val calendar = Calendar.getInstance()
+    private fun getTime(textView: TextView, calendar: Calendar) : Calendar{
         val timeSetListener = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, hour, minute ->
-            calendar.set(Calendar.HOUR, hour)
-            calendar.set(Calendar.MINUTE, minute)
-            val myFormat = "a hh:mm"
-            val sdf = SimpleDateFormat(myFormat, Locale.KOREA)
+            calendar.set(Calendar.HOUR, timePicker.hour)
+            calendar.set(Calendar.MINUTE, timePicker.minute)
+            val sdf = SimpleDateFormat(timeFormat, Locale.KOREAN)
             textView.text = sdf.format(calendar.time)
-        }, 0, 0, false)
+        }, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), false)
         timeSetListener.show()
         return calendar
      }
     private fun getDate(textView: TextView, calendar: Calendar): Calendar {
         val datePicker  =  DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-            val myFormat = "yyyy.MM.dd(E)" // mention the format you need
             val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
             //데이터 입력
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-
             textView.text = sdf.format(calendar.time)
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
+
         datePicker.show()
         return calendar
     }
@@ -182,7 +164,7 @@ class DaySelectModal : AppCompatActivity() {
     }
 
 
-    override fun onBackPressed() {
+    /*override fun onBackPressed() {
         val toast= Toast.makeText(baseContext, "\'뒤로\' 버튼을 한번 더 누르시면 종료됩니다.", Toast.LENGTH_SHORT)
         if (System.currentTimeMillis() > backpressedTime + 2000) {
             backpressedTime = System.currentTimeMillis();
@@ -192,5 +174,5 @@ class DaySelectModal : AppCompatActivity() {
             finishAndRemoveTask();
             toast.cancel()
         }
-    }
+    }*/
 }

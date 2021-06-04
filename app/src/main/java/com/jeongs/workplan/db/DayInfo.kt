@@ -9,8 +9,8 @@ import java.sql.Date
 
 @Entity(tableName = "DayInfo")
 class DayInfo(@PrimaryKey(autoGenerate = true) var id: Long,
-              @ColumnInfo(name = "startDate") var startDate :Long,
-              @ColumnInfo(name = "endDate") var endDate : Long,
+              @ColumnInfo(name = "startDate" , ) var startDate :String,
+              @ColumnInfo(name = "endDate") var endDate : String,
               @ColumnInfo(name = "countryTime")  var countryTime : String?,
               @ColumnInfo(name = "repeat") var repeat : Boolean,
               @ColumnInfo(name = "place") var place : String?,

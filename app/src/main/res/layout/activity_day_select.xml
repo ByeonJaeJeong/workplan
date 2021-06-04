@@ -30,9 +30,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5px"
-            android:paddingLeft="10px"
-            android:paddingRight="10px"
+
             android:orientation="horizontal"
             android:layout_marginBottom="20dp">
             <TextView
@@ -47,22 +45,21 @@
                 android:focusable="true"
                 android:textSize="20dp"
                 android:singleLine="true"
-                android:textColor="@color/black"
-                android:text="2021.05.12(수)"/>
+                android:textColor="@color/black" />
+
             <TextView
                 android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_marginLeft="30px"
+                android:textSize="20dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="@drawable/textviewbtn_item"
-                android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="20dp"
                 android:singleLine="true"
-                android:text="오전 00:00"/>
+                android:gravity="center" />
         </LinearLayout>
         <TextView
             android:layout_width="match_parent"
@@ -71,28 +68,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:padding="5px"
-            android:clickable="true"
-            android:focusable="true"
-            android:paddingLeft="10px"
-            android:layout_marginLeft="10px"
-            android:paddingRight="10px"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
             <TextView
                 android:id="@+id/end_day"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="20dp"
+                android:background="@drawable/textviewbtn_item"
                 android:layout_marginLeft="30px"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="@drawable/textviewbtn_item"
-                android:textColor="@color/black"
+                android:textSize="20dp"
                 android:singleLine="true"
-                android:text="2021.05.12(수)"/>
+                android:textColor="@color/black" />
             <TextView
                 android:id="@+id/end_time"
                 android:layout_width="wrap_content"
@@ -105,8 +95,7 @@
                 android:background="@drawable/textviewbtn_item"
                 android:textColor="@color/black"
                 android:singleLine="true"
-                android:gravity="center"
-                android:text="오전 00:00"/>
+                android:gravity="center" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

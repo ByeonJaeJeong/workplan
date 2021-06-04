@@ -1,5 +1,6 @@
 package com.jeongs.workplan.db
 
+import android.util.Log
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert

@@ -13,6 +13,8 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
+import com.jeongs.workplan.db.DayInfo
+import com.jeongs.workplan.db.DayInfoDB
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.text.SimpleDateFormat
@@ -31,6 +33,7 @@ class HomeFragment : Fragment(){
     lateinit var root:View
     private lateinit var dateCalendar : Calendar
     lateinit var firstFragmentStateAdapter :FragmentStateAdapter
+    private var dayInfoDb: DayInfoDB? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +41,18 @@ class HomeFragment : Fragment(){
         activity?.run {
             sharedViewModel= ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
         }
-
+        //db연결
+        dayInfoDb= context?.applicationContext?.let { DayInfoDB.getInstance(it) }
+        var dayList = listOf<DayInfo>()
+        //DB데이터 불러오는 작업
+        val r = Runnable {
+            dayList= dayInfoDb?.dayInfoDao()?.getAll()!!
+            for(day in dayList){
+                Log.e("dayList",day.toString())
+            }
+        }
+        val thread= Thread(r)
+        thread.start()
     }
 
     override fun onCreateView(
