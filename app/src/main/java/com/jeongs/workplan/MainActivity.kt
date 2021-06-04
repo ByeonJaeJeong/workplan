@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         //db연결
         dayInfoDb=DayInfoDB.getInstance(this)
         var dayList = listOf<DayInfo>()
+        //DB데이터 불러오는 작업
         val r = Runnable {
             dayList= dayInfoDb?.dayInfoDao()?.getAll()!!
             for(day in dayList){

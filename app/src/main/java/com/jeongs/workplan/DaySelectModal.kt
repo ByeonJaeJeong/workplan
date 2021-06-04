@@ -25,7 +25,6 @@ class DaySelectModal : AppCompatActivity() {
     var date : String = ""
     private var backpressedTime: Long = 0 //백버튼 시간
     private var dayInfoDb: DayInfoDB? = null //DB선언
-
      var start_date :Calendar = Calendar.getInstance()
      var end_date :Calendar = Calendar.getInstance()
     var start_time :Calendar = Calendar.getInstance()
@@ -100,16 +99,31 @@ class DaySelectModal : AppCompatActivity() {
                 //저장후 다시돌아가는 메소드
 
                 val start_calendar = Calendar.getInstance()
+                //날짜정보 입력
                 start_calendar.time=start_date.time
+                //시분초 0으로 초기화
+                start_calendar.set(Calendar.HOUR,0)
+                start_calendar.set(Calendar.MINUTE,0)
+                start_calendar.set(Calendar.SECOND,0)
+                start_calendar.set(Calendar.MILLISECOND,0)
+                //시 분 입력
                 start_calendar.set(Calendar.HOUR,start_time.get(Calendar.HOUR))
                 start_calendar.set(Calendar.MINUTE,start_time.get(Calendar.MINUTE))
 
                 val end_calendar = Calendar.getInstance()
+                //날짜정보 입력
                 end_calendar.time= end_date.time
+                //시분초 0으로 초기화
+                end_calendar.set(Calendar.HOUR,0)
+                end_calendar.set(Calendar.MINUTE,0)
+                end_calendar.set(Calendar.SECOND,0)
+                end_calendar.set(Calendar.MILLISECOND,0)
+                //시분 입력
                 end_calendar.set(Calendar.HOUR,end_time.get(Calendar.HOUR))
                 end_calendar.set(Calendar.MINUTE,end_time.get(Calendar.MINUTE))
 
-                var dayInfo= DayInfo(0,start_calendar.timeInMillis,end_calendar.timeInMillis, "서울(GMT+9:00)",false,place_edit.text.toString(),memo_edit.text.toString())
+
+                var dayInfo= DayInfo(0,start_calendar.timeInMillis,end_calendar.timeInMillis, time_edit.text.toString(),false,place_edit.text.toString(),memo_edit.text.toString())
 
 
                 val r = Runnable {
@@ -146,9 +160,11 @@ class DaySelectModal : AppCompatActivity() {
         val datePicker  =  DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
             val myFormat = "yyyy.MM.dd(E)" // mention the format you need
             val sdf = SimpleDateFormat(myFormat, Locale.KOREAN)
+            //데이터 입력
             calendar.set(Calendar.YEAR, year)
             calendar.set(Calendar.MONTH, month)
             calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
             textView.text = sdf.format(calendar.time)
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH))
         datePicker.show()
