@@ -2,6 +2,7 @@
 package com.jeongs.workplan.ui.home
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
+import com.jeongs.workplan.db.DayInfo
+import com.jeongs.workplan.db.DayInfoDB
 import kotlinx.android.synthetic.main.fragment_home_view.view.*
 import java.util.*
 
@@ -26,7 +29,7 @@ class CalendarFragment(val parentView: View?) : Fragment() {
     lateinit var calendar_layout : LinearLayout
     lateinit var calendarAdapter: CalendarAdapter
     private var sharedate = Calendar.getInstance()
-
+    private var dayInfoDb: DayInfoDB? = null
     companion object{
         var instance : CalendarFragment? = null
     }
@@ -46,6 +49,7 @@ class CalendarFragment(val parentView: View?) : Fragment() {
             sharedate.set(Calendar.YEAR,sharedViewModel.year)
             sharedate.set(Calendar.MONTH,sharedViewModel.month)
         }
+
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home_view, container, false)
@@ -66,6 +70,20 @@ class CalendarFragment(val parentView: View?) : Fragment() {
         currentDate = date
         val calendar= Calendar.getInstance()
         calendar.time= date
+        //db연결
+        dayInfoDb= context?.applicationContext?.let { DayInfoDB.getInstance(it) }
+        var dayList = listOf<DayInfo>()
+        //DB데이터 불러오는 작업
+        val r = Runnable {
+            dayList= dayInfoDb?.dayInfoDao()?.selectDate(calendar.get(Calendar.YEAR).toString()+"-"+String.format("%02d",calendar.get(Calendar.MONTH)+1)+"%")!!
+            Log.e("dayList",String.format("%02d",calendar.get(Calendar.YEAR))+","+( String.format("%02d",calendar.get(Calendar.MONTH)+1))+","+pageIndex.toString())
+            for(day in dayList){
+                Log.e("dayList",day.toString())
+            }
+
+        }
+        val thread= Thread(r)
+        thread.start()
         calendarAdapter= CalendarAdapter(view.context,calendar_layout,date,parentView)
         calendar_view.adapter=calendarAdapter
     }

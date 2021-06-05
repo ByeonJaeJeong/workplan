@@ -12,6 +12,7 @@ interface DayInfoDAO{
     fun getAll(): List<DayInfo>
     @Insert
     fun insert(dayInfo : DayInfo)
-
+    @Query("SELECT * FROM DayInfo WHERE startDate Like :date ")
+    fun selectDate(date : String ) :List<DayInfo>
 
 }
