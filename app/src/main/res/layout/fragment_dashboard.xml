@@ -16,17 +16,41 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_height="0dp"
         app:layout_constraintTop_toTopOf="parent"
+        android:padding="10dp"
+        android:gravity="center_horizontal"
         app:layout_constraintBottom_toTopOf="@id/guideline2"
+
         >
+        <TextView
+            android:id="@+id/nStmt_leftButton_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:paddingRight="10dp"
+            android:textSize="25dp"
+            android:text="\u003c"
+            />
         <TextView
             android:id="@+id/nStmt_yearEnd_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/nStmt_rightButton_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            android:padding="5dp"
+            android:paddingLeft="10dp"
+            android:text="\u003E"
+            />
     </LinearLayout>
+
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/nStmt_viewpager2"
         android:layout_width="match_parent"
