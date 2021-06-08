@@ -54,7 +54,7 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.text.observe(viewLifecycleOwner,{
             nStmt_yearEnd_textView.text=it
         })
-
+        //좌측버튼
         root.nStmt_leftButton_textView.setOnClickListener {
             select_cal.add(Calendar.MONTH,-1)
             lastDay_cal.add(Calendar.MONTH,-1)
@@ -62,6 +62,7 @@ class DashboardFragment : Fragment() {
             lastDay_cal.set(Calendar.DAY_OF_MONTH,last_day)
             dashboardViewModel.text.value= sdf.format(select_cal.time)+" - "+sdf.format(lastDay_cal.time)
         }
+        //우측버튼
         root.nStmt_rightButton_textView.setOnClickListener {
             select_cal.add(Calendar.MONTH,1)
             lastDay_cal.add(Calendar.MONTH,1)
@@ -69,8 +70,10 @@ class DashboardFragment : Fragment() {
             lastDay_cal.set(Calendar.DAY_OF_MONTH,last_day)
             dashboardViewModel.text.value= sdf.format(select_cal.time)+" - "+sdf.format(lastDay_cal.time)
         }
+        //날짜 클릭시 메소드
         root.nStmt_yearEnd_textView.setOnClickListener {
             val bottomDialog = PeriodFilterBottomSheet()
+
             activity?.supportFragmentManager?.let { it1 -> bottomDialog.show(it1, bottomDialog.tag)}
             }
 
