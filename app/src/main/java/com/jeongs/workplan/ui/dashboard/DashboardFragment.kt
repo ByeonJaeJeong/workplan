@@ -30,12 +30,14 @@ class DashboardFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.run {
-            sharedViewModel= ViewModelProvider(this,ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
+            sharedViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(SharedViewModel::class.java)
         }
         select_cal = Calendar.getInstance()
-        select_cal.set(sharedViewModel.year,sharedViewModel.month,1)
-        last_day= select_cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+        select_cal.set(sharedViewModel.year, sharedViewModel.month, 1)
+        last_day = select_cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
+
+
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -73,7 +75,6 @@ class DashboardFragment : Fragment() {
         //날짜 클릭시 메소드
         root.nStmt_yearEnd_textView.setOnClickListener {
             val bottomDialog = PeriodFilterBottomSheet()
-
             activity?.supportFragmentManager?.let { it1 -> bottomDialog.show(it1, bottomDialog.tag)}
             }
 
