@@ -1,21 +1,14 @@
 package com.jeongs.workplan.ui.dashboard
 
 import android.os.Bundle
-import android.os.LocaleList
-import android.support.v4.app.INotificationSideChannel
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.jeongs.workplan.R
 import com.jeongs.workplan.ui.home.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_dashboard.*
 import kotlinx.android.synthetic.main.fragment_dashboard.view.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -74,7 +67,7 @@ class DashboardFragment : Fragment() {
         }
         //날짜 클릭시 메소드
         root.nStmt_yearEnd_textView.setOnClickListener {
-            val bottomDialog = PeriodFilterBottomSheet()
+            val bottomDialog = PeriodFilterBottomSheet(dashboardViewModel)
             activity?.supportFragmentManager?.let { it1 -> bottomDialog.show(it1, bottomDialog.tag)}
             }
 

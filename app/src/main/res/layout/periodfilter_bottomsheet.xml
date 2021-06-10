@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools">
 
     <LinearLayout
         android:id="@+id/filter_select_layout"
@@ -10,33 +11,79 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:padding="15dp"
         app:layout_constraintTop_toTopOf="parent"
         >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            >
         <TextView
             android:id="@+id/filter_select"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:padding="3dp"
+            android:background="@drawable/textview_radius"
             android:text="선택"/>
+        </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        >
         <TextView
             android:id="@+id/filter_week"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:padding="3dp"
+            android:background="@drawable/textview_radius"
+            android:gravity="center"
             android:text="일주일"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center">
         <TextView
             android:id="@+id/filter_month"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:padding="3dp"
+            android:background="@drawable/textview_radius"
             android:text="1개월"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        >
         <TextView
             android:id="@+id/filter_threeMonth"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10px"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:padding="3dp"
+            android:background="@drawable/textview_radius"
             android:text="3개월"/>
     </LinearLayout>
+    </LinearLayout>
+    <!--기간 필터 종류 끝-->
+    <!--현재 날짜 출력-->
     <TextView
         android:id="@+id/date_text"
         android:layout_width="match_parent"
@@ -44,12 +91,23 @@
         app:layout_constraintTop_toBottomOf="@+id/filter_select_layout"
         android:gravity="center"
         android:text="테스트중"/>
-    <LinearLayout
-        android:orientation="vertical"
-        android:id="@+id/filter_datePicker_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintTop_toBottomOf="@+id/date_text"
-        >
-    </LinearLayout>
+    <!-- 현재날짜 출력 끝 -->
+    <!-- 선택 사용시 출력하는 datePicker 출력 -->
+    <com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
+        android:id="@+id/calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        custom:disable_date_color="#ABABAB"
+        custom:header_bg="@drawable/calendar_header"
+        custom:range_color="@color/range_color"
+        custom:selected_date_circle_color="@color/selected_date_circle_color"
+        custom:title_color="@color/calendar_header_title"
+        app:layout_constraintTop_toBottomOf="@id/date_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:visibility="invisible"
+        />
+   >
+
 </androidx.constraintlayout.widget.ConstraintLayout>
