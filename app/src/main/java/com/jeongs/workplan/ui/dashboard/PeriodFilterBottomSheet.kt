@@ -1,3 +1,4 @@
+
 package com.jeongs.workplan.ui.dashboard
 
 import android.os.Bundle
@@ -42,21 +43,31 @@ class PeriodFilterBottomSheet(val dashboardViewModel: DashboardViewModel) : Bott
         Log.e("text 체크",text[0]+","+text[1]+","+text[2])
         calendar.set(text[0].toInt(),text[1].toInt(),text[2].substring(0,2).toInt())
 
-
+        dashboardViewModel.text.observe(viewLifecycleOwner,{
+            view.date_text.text=it
+        })
         //선택 버튼 동작 이벤트
         filter_select.setOnClickListener {
-           view.calendar
+            dashboardViewModel.filter_change(4)
+
         }
         //일주일 버튼 동작 이벤트
         filter_week.setOnClickListener {
+            dashboardViewModel.filter_change(0)
 
         }
-        //1개월 버튼 동작 이벤트
+        //첫날부터 끝날까지 한달
+        filter_thisMonth.setOnClickListener {
+            dashboardViewModel.filter_change(1)
+        }
+        //현재 진행중인 날부터 다음달 그날까지
         filter_month.setOnClickListener {
+            dashboardViewModel.filter_change(2)
 
         }
         //3개월 버튼 동작 이벤트
         filter_threeMonth.setOnClickListener {
+            dashboardViewModel.filter_change(3)
 
         }
 

@@ -1,6 +1,7 @@
 package com.jeongs.workplan.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,25 +46,19 @@ class DashboardFragment : Fragment() {
         val sdf =SimpleDateFormat("yyyy-MM-dd(E)", Locale.KOREAN)
         val lastDay_cal = Calendar.getInstance()
         lastDay_cal.set(sharedViewModel.year,sharedViewModel.month,last_day)
-        dashboardViewModel.text.value=sdf.format(select_cal.time)+" - "+sdf.format(lastDay_cal.time)
+       dashboardViewModel.getDate()
         dashboardViewModel.text.observe(viewLifecycleOwner,{
             nStmt_yearEnd_textView.text=it
         })
         //좌측버튼
         root.nStmt_leftButton_textView.setOnClickListener {
-            select_cal.add(Calendar.MONTH,-1)
-            lastDay_cal.add(Calendar.MONTH,-1)
-            last_day=lastDay_cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-            lastDay_cal.set(Calendar.DAY_OF_MONTH,last_day)
-            dashboardViewModel.text.value= sdf.format(select_cal.time)+" - "+sdf.format(lastDay_cal.time)
+            Log.e("btn","좌측버튼작동")
+            dashboardViewModel.backDate()
         }
         //우측버튼
         root.nStmt_rightButton_textView.setOnClickListener {
-            select_cal.add(Calendar.MONTH,1)
-            lastDay_cal.add(Calendar.MONTH,1)
-            last_day=lastDay_cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-            lastDay_cal.set(Calendar.DAY_OF_MONTH,last_day)
-            dashboardViewModel.text.value= sdf.format(select_cal.time)+" - "+sdf.format(lastDay_cal.time)
+            Log.e("btn","우측버튼작동")
+            dashboardViewModel.nextDate()
         }
         //날짜 클릭시 메소드
         root.nStmt_yearEnd_textView.setOnClickListener {
