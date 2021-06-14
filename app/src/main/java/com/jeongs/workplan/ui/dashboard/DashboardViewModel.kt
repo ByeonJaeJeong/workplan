@@ -128,6 +128,8 @@ class DashboardViewModel : ViewModel() {
     fun setDate(date1: Date, date2: Date) {
         start_calendar.time = date1
         end_calendar.time = date2
+        dateToString()
+        getDate()
     }
 
 }
