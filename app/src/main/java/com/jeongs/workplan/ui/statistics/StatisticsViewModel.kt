@@ -1,13 +1,11 @@
-package com.jeongs.workplan.ui.dashboard
+package com.jeongs.workplan.ui.statistics
 
-import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DashboardViewModel : ViewModel() {
+class StatisticsViewModel : ViewModel() {
 
     companion object {
         var start_calendar = Calendar.getInstance()

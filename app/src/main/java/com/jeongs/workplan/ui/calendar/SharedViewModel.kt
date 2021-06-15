@@ -1,4 +1,4 @@
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
 import androidx.lifecycle.ViewModel
 import java.util.*

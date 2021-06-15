@@ -1,5 +1,5 @@
 
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
 import android.os.Bundle
 
@@ -7,14 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jeongs.workplan.R
 import android.icu.util.Calendar
-import android.util.Log
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.viewpager2.widget.ViewPager2
-import com.jeongs.workplan.db.DayInfo
-import com.jeongs.workplan.db.DayInfoDB
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.text.SimpleDateFormat

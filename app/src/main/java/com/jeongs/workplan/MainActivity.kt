@@ -8,10 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.jeongs.workplan.db.DayInfo
-import com.jeongs.workplan.db.DayInfoDB
-import com.jeongs.workplan.ui.home.SharedViewModel
-import java.nio.file.Files
+import com.jeongs.workplan.ui.calendar.SharedViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 

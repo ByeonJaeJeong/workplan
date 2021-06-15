@@ -1,4 +1,4 @@
-package com.jeongs.workplan.ui.dashboard
+package com.jeongs.workplan.ui.statistics
 
 import android.os.Bundle
 import android.util.Log
@@ -9,14 +9,14 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.jeongs.workplan.R
-import com.jeongs.workplan.ui.home.SharedViewModel
-import kotlinx.android.synthetic.main.fragment_dashboard.view.*
+import com.jeongs.workplan.ui.calendar.SharedViewModel
+import kotlinx.android.synthetic.main.fragment_statistics.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class DashboardFragment : Fragment() {
+class StatisticsFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var dashboardViewModel: StatisticsViewModel
     private lateinit var sharedViewModel : SharedViewModel
     private lateinit var select_cal : Calendar
     var last_day :Int = 0
@@ -39,8 +39,8 @@ class DashboardFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
         dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
+                ViewModelProvider(this).get(StatisticsViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_statistics, container, false)
 
         var nStmt_yearEnd_textView= root.findViewById<TextView>(R.id.nStmt_yearEnd_textView)
         val sdf =SimpleDateFormat("yyyy-MM-dd(E)", Locale.KOREAN)

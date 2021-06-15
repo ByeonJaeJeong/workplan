@@ -1,5 +1,5 @@
 
-package com.jeongs.workplan.ui.dashboard
+package com.jeongs.workplan.ui.statistics
 
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,18 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.lifecycle.ViewModelProvider
-import com.archit.calendardaterangepicker.customviews.CalendarListener
-import com.archit.calendardaterangepicker.customviews.DateRangeCalendarView
-import com.archit.calendardaterangepicker.customviews.DateRangeCalendarViewApi
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.datepicker.MaterialDatePicker
 import com.jeongs.workplan.R
 import kotlinx.android.synthetic.main.periodfilter_bottomsheet.*
 import kotlinx.android.synthetic.main.periodfilter_bottomsheet.view.*
 import java.util.*
 
-class PeriodFilterBottomSheet(val dashboardViewModel: DashboardViewModel) : BottomSheetDialogFragment() {
+class PeriodFilterBottomSheet(val dashboardViewModel: StatisticsViewModel) : BottomSheetDialogFragment() {
 
 
 

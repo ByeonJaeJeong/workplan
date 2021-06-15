@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.jeongs.workplan.ui.home.HomeFragment"
+        android:name="com.jeongs.workplan.ui.calendar.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.jeongs.workplan.ui.dashboard.DashboardFragment"
+        android:name="com.jeongs.workplan.ui.statistics.StatisticsFragment"
         android:label="@string/title_statistics"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_statistics" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.jeongs.workplan.ui.notifications.NotificationsFragment"
+        android:name="com.jeongs.workplan.ui.preferences.PreferencesFragment"
         android:label="@string/title_more"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_Preferences" />
 </navigation>

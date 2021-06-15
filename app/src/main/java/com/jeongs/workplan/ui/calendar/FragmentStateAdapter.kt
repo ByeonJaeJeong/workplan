@@ -1,6 +1,5 @@
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity

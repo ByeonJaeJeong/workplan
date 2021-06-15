@@ -1,24 +1,15 @@
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.jeongs.workplan.MainActivity
 import com.jeongs.workplan.R
-import java.util.*
 
 class MonthSelectDialog(date: String,val itemClick: (String) ->Unit) : BottomSheetDialogFragment(),View.OnClickListener {
         var year = date.substring(0,4).toInt()

@@ -1,4 +1,4 @@
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
 import android.content.Context
 import android.content.Intent
@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2

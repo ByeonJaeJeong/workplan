@@ -1,4 +1,4 @@
-package com.jeongs.workplan.ui.home
+package com.jeongs.workplan.ui.calendar
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
