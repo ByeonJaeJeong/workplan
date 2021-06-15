@@ -39,6 +39,7 @@ class DashboardViewModel : ViewModel() {
             0 -> {
                 end_calendar.add(Calendar.DAY_OF_MONTH, 7)
                 end_calendar.add(Calendar.DAY_OF_MONTH, -1)
+                
             }
             1 -> {
                 start_calendar.set(Calendar.DAY_OF_MONTH, start_calendar.getActualMinimum(Calendar.DAY_OF_MONTH))

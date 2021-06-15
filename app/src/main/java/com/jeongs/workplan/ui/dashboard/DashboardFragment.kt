@@ -65,6 +65,7 @@ class DashboardFragment : Fragment() {
             val bottomDialog = PeriodFilterBottomSheet(dashboardViewModel)
             activity?.supportFragmentManager?.let { it1 -> bottomDialog.show(it1, bottomDialog.tag)}
             }
+        root.nStmt_recycleView.adapter
 
 
         return root
